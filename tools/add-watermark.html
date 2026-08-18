@@ -1,1 +1,123 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Add Watermark — Pixora Rocket</title><link rel="stylesheet" href="../assets/style.css"></head><body><header class="top"><div class="logo"><b>✦</b> Pixora Rocket</div><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#tools">All Tools</a><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav></header><main class="wrap"><section class="tool"><a href="../index.html"><button class="back">← Back to All Tools</button></a><div class="panel"><div class="title"><div class="ico">◆</div><div><h2>Add Watermark</h2><p>Add a watermark</p></div></div><div class="upload"><strong>Select an image for Add Watermark</strong>Choose or drag & drop an image here<br><button class="primary" onclick="document.getElementById('file').click()">Choose Image</button><input id="file" hidden type="file" accept="image/*"></div><div class="preview" id="preview"><img id="previewImg"><div class="controls"><input id="WM" placeholder="Watermark text"><input id="OP" type="number" value="45"><button class="download" onclick="watermarkTool()">Watermark & Download</button></div></div><div class="hint" id="hint">This is the dedicated <b>Add Watermark</b> workspace. This file is independent from the main website.</div></div></section></main><footer>Pixora Rocket • Add Watermark</footer><script src="../assets/theme.js"></script><script src="../assets/common.js"></script><script>document.getElementById("file").onchange=e=>loadFile(e.target.files[0]);</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Image Watermark - All Free Image Tools</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="logo"><b>✦</b> All Free Image Tools</div><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#tools">All Tools</a><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav></header>
+
+<main class="wrap"><section class="tool">
+<a href="../index.html"><button class="back">← Back to All Tools</button></a>
+
+<div class="panel">
+<div class="title"><div class="ico">◆</div><div><h2>Advanced Image Watermark</h2><p>Add professional text or logo watermarks to your images.</p></div></div>
+
+<div class="upload" id="dropZone">
+<strong>Upload your image</strong><span>Drag & drop JPG, PNG or WEBP here.</span>
+<button class="primary" id="choose">Choose Image</button>
+<input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+</div>
+
+<div class="preview" id="preview">
+<div style="text-align:center"><canvas id="canvas" style="max-width:100%;border-radius:12px"></canvas></div>
+
+<div class="controls">
+<label>Watermark Type<select id="type"><option value="text">Text Watermark</option><option value="logo">Logo / Image</option></select></label>
+<label>Position<select id="position"><option value="center">Center</option><option value="tl">Top Left</option><option value="tc">Top Center</option><option value="tr">Top Right</option><option value="ml">Middle Left</option><option value="mr">Middle Right</option><option value="bl">Bottom Left</option><option value="bc">Bottom Center</option><option value="br">Bottom Right</option></select></label>
+</div>
+
+<div id="textBox">
+<div class="controls">
+<label style="flex:1">Watermark Text<input id="text" type="text" placeholder="© All Free Image Tools" value="© All Free Image Tools"></label>
+</div>
+<div class="controls">
+<label>Text Color<input id="color" type="color" value="#ffffff"></label>
+<label>Font<select id="font"><option>Arial</option><option>Georgia</option><option>Verdana</option><option>Times New Roman</option><option>Courier New</option></select></label>
+</div>
+</div>
+
+<div id="logoBox" style="display:none">
+<div class="upload" style="margin-top:10px">
+<strong>Select watermark logo</strong>
+<span>PNG is recommended for transparent logos.</span>
+<button class="primary" id="logoChoose">Choose Logo</button>
+<input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+</div>
+</div>
+
+<div class="controls">
+<label style="flex:1">Size<input id="size" type="range" min="10" max="300" value="60"></label><strong id="sizeValue">60</strong>
+<label style="flex:1">Opacity<input id="opacity" type="range" min="5" max="100" value="65"></label><strong id="opacityValue">65%</strong>
+</div>
+
+<div class="controls">
+<label style="flex:1">Rotation<input id="rotation" type="range" min="-180" max="180" value="0"></label><strong id="rotationValue">0°</strong>
+<label><input id="repeat" type="checkbox"> Repeat Pattern</label>
+</div>
+
+<div class="controls">
+<select id="format"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WEBP</option></select>
+<label style="flex:1">Quality<input id="quality" type="range" min="10" max="100" value="92"></label><strong id="qualityValue">92%</strong>
+</div>
+
+<div class="controls">
+<button class="download" id="download">Add Watermark & Download</button>
+<button class="back" id="reset">Reset</button>
+</div>
+<div class="hint" id="result">Upload an image to begin.</div>
+</div>
+
+<div class="hint"><b>How to Use:</b><br><br><b>1. Upload Image:</b> Select the image you want to watermark.<br><br><b>2. Choose Type:</b> Select Text Watermark to add text or Logo / Image to add your own logo.<br><br><b>3. Set Position:</b> Choose where the watermark should appear.<br><br><b>4. Adjust Size:</b> Increase or decrease watermark size using the Size slider.<br><br><b>5. Opacity:</b> Lower opacity for a subtle watermark.<br><br><b>6. Rotation:</b> Rotate the watermark from -180° to +180°.<br><br><b>7. Repeat Pattern:</b> Enable it to place the watermark repeatedly across the image.<br><br><b>8. Download:</b> Choose your output format and click <b>Add Watermark & Download</b>.</div>
+</div>
+
+<div class="panel" style="margin-top:20px">
+<div class="title"><div class="ico">i</div><div><h2>About Image Watermark</h2><p>Protect and brand your images with text or logos.</p></div></div>
+<div class="hint"><p><b>Advanced Image Watermark</b> allows you to add branding, copyright notices, usernames or logos to your images.</p><p>You can control position, size, opacity and rotation to create a professional-looking watermark.</p><p>The original image remains unchanged.</p></div>
+
+<div class="title" style="margin-top:20px"><div class="ico">✓</div><div><h2>Features</h2><p>Professional watermark controls.</p></div></div>
+<div class="hint">✓ Text watermark<br><br>✓ Logo watermark<br><br>✓ Custom text color<br><br>✓ Multiple font choices<br><br>✓ 9 position presets<br><br>✓ Size control<br><br>✓ Opacity control<br><br>✓ Rotation control<br><br>✓ Repeat watermark pattern<br><br>✓ JPG / PNG / WEBP export<br><br>✓ Quality control<br><br>✓ Drag & drop upload<br><br>✓ Browser-based processing</div>
+
+<div class="title" style="margin-top:20px"><div class="ico">★</div><div><h2>Helpful Tips</h2><p>Create a clean watermark.</p></div></div>
+<div class="hint"><p><b>Tip 1:</b> Use a transparent PNG logo for the cleanest logo watermark.</p><p><b>Tip 2:</b> Around 30–70% opacity often works well for subtle branding.</p><p><b>Tip 3:</b> Use Repeat Pattern when you want stronger protection against unauthorized reuse.</p><p><b>Tip 4:</b> Avoid making the watermark so large that it hides important image content.</p></div>
+
+<div class="title" style="margin-top:20px"><div class="ico">?</div><div><h2>FAQ</h2><p>Common questions.</p></div></div>
+<div class="hint"><p><b>Can I add my own logo?</b><br>Yes. Select Logo / Image and upload your logo.</p><p><b>Can I change watermark transparency?</b><br>Yes. Use the Opacity slider.</p><p><b>Can I put a watermark in the center?</b><br>Yes. Select Center.</p><p><b>Can I repeat the watermark?</b><br>Yes. Enable Repeat Pattern.</p><p><b>Does this modify my original image?</b><br>No. A new watermarked image is created.</p><p><b>Are my images uploaded?</b><br>No server upload is required for processing.</p></div>
+
+<div class="title" style="margin-top:20px"><div class="ico">🔒</div><div><h2>Privacy</h2><p>Local browser processing.</p></div></div>
+<div class="hint">Watermark processing is performed locally in your browser. Your image and logo are not intentionally uploaded to a remote server.</div>
+</div>
+</section></main>
+
+<footer>All Free Image Tools • Advanced Image Watermark</footer>
+<script src="../assets/theme.js"></script>
+<script>
+const $=id=>document.getElementById(id),file=$("file"),choose=$("choose"),zone=$("dropZone"),preview=$("preview"),canvas=$("canvas"),ctx=canvas.getContext("2d"),type=$("type"),position=$("position"),textBox=$("textBox"),logoBox=$("logoBox"),text=$("text"),color=$("color"),font=$("font"),logoChoose=$("logoChoose"),logoFile=$("logoFile"),sizeRange=$("size"),opacity=$("opacity"),rotation=$("rotation"),repeat=$("repeat"),format=$("format"),quality=$("quality"),download=$("download"),reset=$("reset"),result=$("result");let image=null,logo=null,selected=null,logoSelected=null;
+
+choose.onclick=()=>file.click();
+file.onchange=e=>{if(e.target.files[0])loadImage(e.target.files[0])};
+logoChoose.onclick=()=>logoFile.click();
+logoFile.onchange=e=>{if(e.target.files[0])loadLogo(e.target.files[0])};
+
+["dragenter","dragover"].forEach(x=>zone.addEventListener(x,e=>{e.preventDefault();zone.style.borderColor="var(--primary)"}));
+zone.addEventListener("dragleave",()=>zone.style.borderColor="");
+zone.addEventListener("drop",e=>{e.preventDefault();zone.style.borderColor="";let f=[...e.dataTransfer.files].find(x=>x.type.startsWith("image/"));if(f)loadImage(f)});
+
+function loadImage(f){selected=f;let u=URL.createObjectURL(f),i=new Image();i.onload=()=>{image=i;preview.style.display="block";zone.style.display="none";fit();result.innerHTML="<b>"+esc(f.name)+"</b><br>Original size: "+size(f.size)+"<br>Dimensions: "+i.naturalWidth+" × "+i.naturalHeight+" px";URL.revokeObjectURL(u)};i.onerror=()=>error("Unable to load image.");i.src=u}
+function loadLogo(f){logoSelected=f;let u=URL.createObjectURL(f),i=new Image();i.onload=()=>{logo=i;result.textContent="Logo selected: "+f.name;draw();URL.revokeObjectURL(u)};i.onerror=()=>error("Unable to load logo.");i.src=u}
+function fit(){let max=1000,s=Math.min(1,max/image.naturalWidth,max/image.naturalHeight);canvas.width=Math.round(image.naturalWidth*s);canvas.height=Math.round(image.naturalHeight*s);draw()}
+function getPos(w,h,wmw,wmh){let p=position.value,m=25,x=w/2-wmw/2,y=h/2-wmh/2;if(p==="tl"){x=m;y=m}if(p==="tc"){x=w/2-wmw/2;y=m}if(p==="tr"){x=w-m-wmw;y=m}if(p==="ml"){x=m;y=h/2-wmh/2}if(p==="mr"){x=w-m-wmw;y=h/2-wmh/2}if(p==="bl"){x=m;y=h-m-wmh}if(p==="bc"){x=w/2-wmw/2;y=h-m-wmh}if(p==="br"){x=w-m-wmw;y=h-m-wmh}return{x,y}}
+function draw(){if(!image)return;ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(image,0,0,canvas.width,canvas.height);ctx.save();ctx.globalAlpha=opacity.value/100;let ang=rotation.value*Math.PI/180,wmw,wmh;if(type.value==="text"){let fs=Math.max(10,+sizeRange.value),s=text.value||"Watermark";ctx.font="bold "+fs+"px "+font.value;let met=ctx.measureText(s);wmw=met.width;wmh=fs*1.2}else{if(!logo){ctx.restore();return}wmw=+sizeRange.value*2;wmh=logo.height*(wmw/logo.width)}let pos=getPos(canvas.width,canvas.height,wmw,wmh);if(repeat.checked){let stepX=wmw+100,stepY=wmh+100;for(let y=-wmh;y<canvas.height+wmh;y+=stepY)for(let x=-wmw;x<canvas.width+wmw;x+=stepX)water(x,y,wmw,wmh,ang)}else water(pos.x,pos.y,wmw,wmh,ang);ctx.restore()}
+function water(x,y,w,h,a){ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(a);if(type.value==="text"){ctx.fillStyle=color.value;ctx.textAlign="center";ctx.textBaseline="middle";ctx.font="bold "+Math.max(10,+sizeRange.value)+"px "+font.value;ctx.fillText(text.value||"Watermark",0,0)}else if(logo)ctx.drawImage(logo,-w/2,-h/2,w,h);ctx.restore()}
+[type,position,text,color,font,sizeRange,opacity,rotation,repeat,format,quality].forEach(e=>e.addEventListener("input",()=>{updateLabels();draw()}));type.onchange=()=>{textBox.style.display=type.value==="text"?"":"none";logoBox.style.display=type.value==="logo"?"":"none";draw()};
+function updateLabels(){$("sizeValue").textContent=sizeRange.value;$("opacityValue").textContent=opacity.value+"%";$("rotationValue").textContent=rotation.value+"°";$("qualityValue").textContent=quality.value+"%"}
+download.onclick=()=>{if(!image)return error("Please upload an image first.");if(type.value==="logo"&&!logo)return error("Please select a logo first.");download.disabled=true;download.textContent="Processing...";let ext=format.value==="image/webp"?"webp":format.value==="image/png"?"png":"jpg";canvas.toBlob(b=>{if(!b)return error("Export failed.");let u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=selected.name.replace(/\.[^/.]+$/,"")+"-watermarked."+ext;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);result.innerHTML="<b>✓ Watermark Added!</b><br>Output size: "+size(b.size)+"<br>Dimensions: "+canvas.width+" × "+canvas.height+"px";download.disabled=false;download.textContent="Add Watermark & Download"},format.value,format.value==="image/png"?undefined:+quality.value/100)};
+reset.onclick=()=>{file.value="";logoFile.value="";image=null;logo=null;selected=null;logoSelected=null;preview.style.display="none";zone.style.display="";text.value="© All Free Image Tools";type.value="text";position.value="center";sizeRange.value=60;opacity.value=65;rotation.value=0;repeat.checked=false;quality.value=92;textBox.style.display="";logoBox.style.display="none";updateLabels();result.textContent="Upload an image to begin.";download.disabled=false;download.textContent="Add Watermark & Download"};
+function error(m){result.innerHTML='<b style="color:var(--danger)">'+esc(m)+"</b>";download.disabled=false;download.textContent="Add Watermark & Download"}
+function size(n){if(!n)return"0 B";let u=["B","KB","MB","GB"],i=Math.min(Math.floor(Math.log(n)/Math.log(1024)),3);return(n/1024**i).toFixed(i?2:0)+" "+u[i]}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+updateLabels();
+</script>
+</body>
+</html>
