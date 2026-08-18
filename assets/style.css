@@ -1508,3 +1508,160 @@ body {
 .grid .card .use:hover {
     background: rgba(255, 255, 255, 0.4);
 }
+/* --- LIGHT MODE: Ultra Premium & Attractive Gradients --- */
+body {
+    background: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1a1a1a;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 15px 0;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* Card Base Styling */
+.grid .card {
+    border-radius: 20px;
+    padding: 22px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.grid .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Premium Light Mode Gradients (Vibrant & Catchy) */
+.grid .card:nth-child(4n+1) {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); /* Indigo / Vibrant Blue */
+    color: #fff;
+}
+
+.grid .card:nth-child(4n+2) {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); /* Bright Sky Blue */
+    color: #fff;
+}
+
+.grid .card:nth-child(4n+3) {
+    background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); /* Modern Pink / Rose */
+    color: #fff;
+}
+
+.grid .card:nth-child(4n+4) {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); /* Rich Violet / Purple */
+    color: #fff;
+}
+
+/* Typography Inside Cards */
+.grid .card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: #ffffff !important;
+    letter-spacing: -0.01em;
+}
+
+.grid .card p {
+    font-size: 0.8rem;
+    margin: 0 0 16px 0;
+    opacity: 0.9;
+    color: #ffffff !important;
+    line-height: 1.4;
+}
+
+/* Top-Right Icon Box */
+.grid .card .ico {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 14px;
+    backdrop-filter: blur(4px);
+}
+
+/* Sleek Pill Button */
+.grid .card .use {
+    background: #ffffff;
+    border: none;
+    color: #1f2937;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.grid .card .use:hover {
+    background: #f3f4f6;
+    transform: scale(1.02);
+}
+
+
+/* --- DARK MODE: Deep Glowing Premium Look --- */
+body.dark, body[data-theme="dark"] {
+    background: #0b0f19;
+    color: #f3f4f6;
+}
+
+body.dark .grid .card, body[data-theme="dark"] .grid .card {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.dark .grid .card:nth-child(4n+1), 
+body[data-theme="dark"] .grid .card:nth-child(4n+1) {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+}
+
+body.dark .grid .card:nth-child(4n+2), 
+body[data-theme="dark"] .grid .card:nth-child(4n+2) {
+    background: linear-gradient(135deg, #082f49 0%, #075985 100%);
+}
+
+body.dark .grid .card:nth-child(4n+3), 
+body[data-theme="dark"] .grid .card:nth-child(4n+3) {
+    background: linear-gradient(135deg, #500724 0%, #831843 100%);
+}
+
+body.dark .grid .card:nth-child(4n+4), 
+body[data-theme="dark"] .grid .card:nth-child(4n+4) {
+    background: linear-gradient(135deg, #2e1065 0%, #4c1d95 100%);
+}
+
+body.dark .grid .card .use, body[data-theme="dark"] .grid .card .use {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.dark .grid .card .use:hover, body[data-theme="dark"] .grid .card .use:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
