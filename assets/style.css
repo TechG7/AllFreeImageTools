@@ -1665,3 +1665,163 @@ body.dark .grid .card .use, body[data-theme="dark"] .grid .card .use {
 body.dark .grid .card .use:hover, body[data-theme="dark"] .grid .card .use:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+/* Text Readability aur Sharpness ke liye */
+.grid .card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.grid .card p {
+    font-size: 0.75rem;
+    margin: 0 0 14px 0;
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Button ko aur clean aur modern look dene ke liye */
+.grid .card .use {
+    background: #ffffff;
+    border: none;
+    color: #111827;
+    padding: 7px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.grid .card .use:hover {
+    transform: scale(1.02);
+}
+/* --- BASE STYLES --- */
+body {
+    background: #f4f5f7;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1f2937;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 15px 0;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.grid .card {
+    border-radius: 18px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 110px;
+    transition: transform 0.2s ease;
+}
+
+.grid .card:hover {
+    transform: translateY(-4px);
+}
+
+/* Light Mode Gradients */
+.grid .card:nth-child(4n+1) { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; }
+.grid .card:nth-child(4n+2) { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: #fff; }
+.grid .card:nth-child(4n+3) { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; }
+.grid .card:nth-child(4n+4) { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: #fff; }
+
+.grid .card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: #ffffff !important;
+}
+
+.grid .card p {
+    font-size: 0.75rem;
+    margin: 0 0 14px 0;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.grid .card .ico {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.grid .card .use {
+    background: #ffffff;
+    border: none;
+    color: #111827;
+    padding: 7px 14px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* --- DARK MODE (Properly Handled for JS toggle) --- */
+body.dark, 
+body[data-theme="dark"], 
+.dark body, 
+html.dark body {
+    background: #0b0f19 !important;
+    color: #f3f4f6 !important;
+}
+
+/* Dark Mode card gradients (Rich and Deep Glow) */
+body.dark .grid .card:nth-child(4n+1), 
+body[data-theme="dark"] .grid .card:nth-child(4n+1) {
+    background: linear-gradient(135deg, #1e1b4b, #312e81) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark .grid .card:nth-child(4n+2), 
+body[data-theme="dark"] .grid .card:nth-child(4n+2) {
+    background: linear-gradient(135deg, #082f49, #0369a1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark .grid .card:nth-child(4n+3), 
+body[data-theme="dark"] .grid .card:nth-child(4n+3) {
+    background: linear-gradient(135deg, #500724, #9d174d) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark .grid .card:nth-child(4n+4), 
+body[data-theme="dark"] .grid .card:nth-child(4n+4) {
+    background: linear-gradient(135deg, #2e1065, #5b21b6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode buttons */
+body.dark .grid .card .use, 
+body[data-theme="dark"] .grid .card .use {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
