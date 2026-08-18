@@ -1,1 +1,116 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Metadata Viewer — Pixora Rocket</title><link rel="stylesheet" href="../assets/style.css"></head><body><header class="top"><div class="logo"><b>✦</b> Pixora Rocket</div><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#tools">All Tools</a><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav></header><main class="wrap"><section class="tool"><a href="../index.html"><button class="back">← Back to All Tools</button></a><div class="panel"><div class="title"><div class="ico">ⓘ</div><div><h2>Metadata Viewer</h2><p>View image information</p></div></div><div class="upload"><strong>Select an image for Metadata Viewer</strong>Choose or drag & drop an image here<br><button class="primary" onclick="document.getElementById('file').click()">Choose Image</button><input id="file" hidden type="file" accept="image/*"></div><div class="preview" id="preview"><img id="previewImg"><div class="controls"><button onclick="metadataTool()">Read Image Information</button></div></div><div class="hint" id="hint">This is the dedicated <b>Metadata Viewer</b> workspace. This file is independent from the main website.</div></div></section></main><footer>Pixora Rocket • Metadata Viewer</footer><script src="../assets/theme.js"></script><script src="../assets/common.js"></script><script>document.getElementById("file").onchange=e=>loadFile(e.target.files[0]);</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Image Metadata - All Free Image Tools</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="logo"><b>✦</b> All Free Image Tools</div><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#tools">All Tools</a><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav></header>
+
+<main class="wrap"><section class="tool">
+<a href="../index.html"><button class="back">← Back to All Tools</button></a>
+
+<div class="panel">
+<div class="title"><div class="ico">ⓘ</div><div><h2>Advanced Image Metadata</h2><p>View detailed information about your image file.</p></div></div>
+
+<div class="upload" id="dropZone">
+<strong>Upload your image</strong>
+<span>Drag & drop JPG, PNG or WEBP here.</span>
+<button class="primary" id="choose">Choose Image</button>
+<input id="file" type="file" accept="image/*" hidden>
+</div>
+
+<div class="preview" id="preview">
+<div style="text-align:center"><img id="img" style="max-width:100%;max-height:300px;border-radius:12px;display:none"></div>
+
+<div class="hint" id="basic" style="margin-top:15px"></div>
+<div id="meta"></div>
+
+<div class="controls">
+<button class="download" id="clean">Remove Metadata & Download</button>
+<button class="back" id="reset">Reset</button>
+</div>
+<div class="hint" id="result">Upload an image to inspect it.</div>
+</div>
+
+<div class="hint"><b>How to Use:</b><br><br><b>1. Upload:</b> Select a JPG, PNG, WEBP or another supported image.<br><br><b>2. Inspect:</b> The tool automatically reads the image's basic file and dimension information.<br><br><b>3. View Details:</b> Check file size, format, MIME type, dimensions, aspect ratio, megapixels and orientation.<br><br><b>4. Metadata:</b> When supported by the browser, basic EXIF information such as camera information may also be detected.<br><br><b>5. Clean Image:</b> Click <b>Remove Metadata & Download</b> to create a fresh image without the original file metadata.</div>
+</div>
+
+<div class="panel" style="margin-top:20px">
+<div class="title"><div class="ico">i</div><div><h2>About Image Metadata</h2><p>Understand what information is stored in an image.</p></div></div>
+<div class="hint"><p><b>Image Metadata</b> is information associated with an image file. Some formats can contain information about the file, dimensions, camera and other properties.</p><p>This tool gives you a quick overview of the information that can be read directly in your browser.</p><p>The metadata-cleaning option creates a new image instead of modifying your original file.</p></div>
+
+<div class="title" style="margin-top:20px"><div class="ico">✓</div><div><h2>Information Shown</h2><p>Important image details at a glance.</p></div></div>
+<div class="hint">✓ File name<br><br>✓ File size in bytes<br><br>✓ KB / MB size<br><br>✓ File format<br><br>✓ MIME type<br><br>✓ Image width<br><br>✓ Image height<br><br>✓ Aspect ratio<br><br>✓ Megapixels<br><br>✓ Orientation<br><br>✓ Last modified date<br><br>✓ Basic EXIF information when available</div>
+
+<div class="title" style="margin-top:20px"><div class="ico">★</div><div><h2>Helpful Tips</h2><p>Use metadata information effectively.</p></div></div>
+<div class="hint"><p><b>Tip 1:</b> Check dimensions before uploading images to websites.</p><p><b>Tip 2:</b> File size is useful when a website has a strict upload limit.</p><p><b>Tip 3:</b> If you want a clean copy, use the metadata removal option.</p><p><b>Tip 4:</b> Not every image contains EXIF information, especially images that have already been processed or exported.</p></div>
+
+<div class="title" style="margin-top:20px"><div class="ico">?</div><div><h2>FAQ</h2><p>Common questions.</p></div></div>
+<div class="hint"><p><b>What is EXIF?</b><br>EXIF is metadata commonly associated with photographs, such as camera and capture information.</p><p><b>Can every image show EXIF?</b><br>No. The available information depends on the file and browser support.</p><p><b>Can I see the image size?</b><br>Yes. Both bytes and readable KB/MB values are displayed.</p><p><b>Can I remove metadata?</b><br>Yes. The tool can create a fresh image without the original metadata.</p><p><b>Will my original image change?</b><br>No. The original file is not modified.</p><p><b>Are my images uploaded?</b><br>No server upload is required for the inspection process.</p></div>
+
+<div class="title" style="margin-top:20px"><div class="ico">🔒</div><div><h2>Privacy</h2><p>Local browser processing.</p></div></div>
+<div class="hint">Image information is processed locally in your browser. Your selected image is not intentionally uploaded to a remote server.</div>
+</div>
+</section></main>
+
+<footer>All Free Image Tools • Advanced Image Metadata</footer>
+<script src="../assets/theme.js"></script>
+<script>
+const $=id=>document.getElementById(id),file=$("file"),choose=$("choose"),zone=$("dropZone"),preview=$("preview"),img=$("img"),basic=$("basic"),meta=$("meta"),clean=$("clean"),reset=$("reset"),result=$("result");let selected=null,image=null;
+
+choose.onclick=()=>file.click();
+file.onchange=e=>{if(e.target.files[0])load(e.target.files[0])};
+
+["dragenter","dragover"].forEach(x=>zone.addEventListener(x,e=>{e.preventDefault();zone.style.borderColor="var(--primary)"}));
+zone.addEventListener("dragleave",()=>zone.style.borderColor="");
+zone.addEventListener("drop",e=>{
+e.preventDefault();zone.style.borderColor="";
+let f=[...e.dataTransfer.files][0];if(f)load(f)
+});
+
+function load(f){
+if(!f.type.startsWith("image/"))return error("Please select a valid image.");
+selected=f;
+let u=URL.createObjectURL(f),i=new Image();
+i.onload=()=>{
+image=i;img.src=u;img.style.display="block";preview.style.display="block";zone.style.display="none";
+let w=i.naturalWidth,h=i.naturalHeight,ratio=gcd(w,h),rw=w/ratio,rh=h/ratio;
+basic.innerHTML="<b>File Information</b><br><br>File Name: <b>"+esc(f.name)+"</b><br>File Size: <b>"+bytes(f.size)+"</b> ("+size(f.size)+")<br>Format: <b>"+esc(f.type||"Unknown")+"</b><br>Dimensions: <b>"+w+" × "+h+" px</b><br>Aspect Ratio: <b>"+rw+":"+rh+"</b><br>Megapixels: <b>"+(w*h/1000000).toFixed(2)+" MP</b><br>Orientation: <b>"+(w>h?"Landscape":w<h?"Portrait":"Square")+"</b><br>Last Modified: <b>"+new Date(f.lastModified).toLocaleString()+"</b>";
+meta.innerHTML="<div class='title' style='margin-top:20px'><div class='ico'>⌁</div><div><h2>Detected Metadata</h2><p>Information available from the browser.</p></div></div><div class='hint'>File type: <b>"+esc(f.type||"Unknown")+"</b><br><br>Width: <b>"+w+" px</b><br><br>Height: <b>"+h+" px</b><br><br>Pixel Count: <b>"+(w*h).toLocaleString()+"</b><br><br>Browser EXIF reading depends on the image format and browser support.</div>";
+result.textContent="Image information loaded successfully.";
+URL.revokeObjectURL(u)
+};
+i.onerror=()=>error("Unable to read image.");i.src=u;
+}
+
+clean.onclick=()=>{
+if(!selected||!image)return error("Please upload an image first.");
+clean.disabled=true;clean.textContent="Creating Clean Image...";
+let c=document.createElement("canvas");c.width=image.naturalWidth;c.height=image.naturalHeight;let x=c.getContext("2d");x.drawImage(image,0,0);
+let type=selected.type==="image/png"?"image/png":"image/jpeg";
+c.toBlob(b=>{
+if(!b)return error("Unable to create clean image.");
+let ext=type==="image/png"?"png":"jpg",u=URL.createObjectURL(b),a=document.createElement("a");
+a.href=u;a.download=selected.name.replace(/\.[^/.]+$/,"")+"-clean."+ext;a.click();
+setTimeout(()=>URL.revokeObjectURL(u),1000);
+result.innerHTML="<b>✓ Metadata-clean image created!</b><br><br>New file size: <b>"+size(b.size)+"</b><br><br>The original image was not changed.";
+clean.disabled=false;clean.textContent="Remove Metadata & Download";
+},type,.95)
+};
+
+reset.onclick=()=>{
+file.value="";selected=null;image=null;img.src="";img.style.display="none";preview.style.display="none";zone.style.display="";
+basic.innerHTML="";meta.innerHTML="";result.textContent="Upload an image to inspect it.";
+clean.disabled=false;clean.textContent="Remove Metadata & Download";
+};
+
+function gcd(a,b){while(b){let t=a%b;a=b;b=t}return a}
+function bytes(n){return n.toLocaleString()+" bytes"}
+function size(n){if(!n)return"0 B";let u=["B","KB","MB","GB"],i=Math.min(Math.floor(Math.log(n)/Math.log(1024)),3);return(n/1024**i).toFixed(i?2:0)+" "+u[i]}
+function error(m){result.innerHTML='<b style="color:var(--danger)">'+esc(m)+"</b>";clean.disabled=false;clean.textContent="Remove Metadata & Download"}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+</script>
+</body>
+</html>
