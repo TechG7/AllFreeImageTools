@@ -1198,3 +1198,116 @@ footer {
     }
 
   }
+/* =========================================================
+   PREMIUM DARK GOLDEN THEME FOR YOUR TOOLKIT WEBSITE
+   ========================================================= */
+
+/* Global Reset & Dark Background Setup */
+:root {
+  --bg-main: #0B0C10;
+  --bg-card: rgba(22, 25, 34, 0.75);
+  --border-color: rgba(212, 175, 55, 0.18);
+  --border-hover: rgba(212, 175, 55, 0.6);
+  --gold-accent: #D4AF37;
+  --gold-gradient: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #996515 100%);
+  --gold-btn: linear-gradient(135deg, #C5A059 0%, #9E7D3B 100%);
+  --text-primary: #F3F4F6;
+  --text-secondary: #9CA3AF;
+}
+
+body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Header & Navbar Styling */
+header, nav, .navbar {
+  background: rgba(11, 12, 16, 0.85) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+header h1, nav .logo, .brand-title {
+  color: var(--text-primary) !important;
+}
+
+/* Hero Section / Main Heading Gradient */
+h1, .hero-title {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.hero-subtitle, p {
+  color: var(--text-secondary) !important;
+}
+
+/* Search Bar Smooth Gold Glow */
+input[type="text"], .search-bar {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input[type="text"]:focus, .search-bar:focus {
+  outline: none;
+  border-color: var(--gold-accent) !important;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.25) !important;
+}
+
+/* Tool Cards Container / Grid */
+.card, .tool-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Card Smooth Lift & Golden Ambient Glow on Hover */
+.card:hover, .tool-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  border-color: var(--border-hover) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.2) !important;
+}
+
+/* Tool Icon Badge Styling */
+.card-icon, .icon-wrapper {
+  background: rgba(212, 175, 55, 0.1) !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  border-radius: 12px !important;
+  color: var(--gold-accent) !important;
+}
+
+/* Tool Title & Description Inside Cards */
+.card h3, .tool-title {
+  color: #FFFFFF !important;
+  font-weight: 600;
+}
+
+.card p, .tool-description {
+  color: var(--text-secondary) !important;
+}
+
+/* Smooth Metallic Gold Buttons */
+.btn, .use-tool-btn, button {
+  background: var(--gold-btn) !important;
+  color: #0B0C10 !important;
+  font-weight: 700 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer;
+}
+
+.btn:hover, .use-tool-btn:hover, button:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4) !important;
+}
