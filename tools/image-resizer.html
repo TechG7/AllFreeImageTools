@@ -1,1 +1,1117 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Image Resizer — Pixora Rocket</title><link rel="stylesheet" href="../assets/style.css"></head><body><header class="top"><div class="logo"><b>✦</b> Pixora Rocket</div><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#tools">All Tools</a><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav></header><main class="wrap"><section class="tool"><a href="../index.html"><button class="back">← Back to All Tools</button></a><div class="panel"><div class="title"><div class="ico">↔</div><div><h2>Image Resizer</h2><p>Resize to exact dimensions</p></div></div><div class="upload"><strong>Select an image for Image Resizer</strong>Choose or drag & drop an image here<br><button class="primary" onclick="document.getElementById('file').click()">Choose Image</button><input id="file" hidden type="file" accept="image/*"></div><div class="preview" id="preview"><img id="previewImg"><div class="controls"><input id="W" type="number" placeholder="Width"><input id="H" type="number" placeholder="Height"><button class="download" onclick="resizeTool()">Resize & Download</button></div></div><div class="hint" id="hint">This is the dedicated <b>Image Resizer</b> workspace. This file is independent from the main website.</div></div></section></main><footer>Pixora Rocket • Image Resizer</footer><script src="../assets/theme.js"></script><script src="../assets/common.js"></script><script>document.getElementById("file").onchange=e=>loadFile(e.target.files[0]);</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Image Resizer — All Free Image Tools</title>
+
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+
+<header class="top">
+
+    <div class="logo">
+        <b>✦</b>
+        All Free Image Tools
+    </div>
+
+    <nav class="nav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#tools">All Tools</a>
+
+        <button
+            class="toggle"
+            id="themeToggle"
+            onclick="toggleTheme()"
+            aria-label="Toggle dark and light mode"
+        >
+            <span>☾</span>
+            <span>☀</span>
+            <i></i>
+        </button>
+    </nav>
+
+</header>
+
+
+<main class="wrap">
+
+<section class="tool">
+
+    <a href="../index.html">
+        <button class="back">
+            ← Back to All Tools
+        </button>
+    </a>
+
+
+    <div class="panel">
+
+        <!-- TOOL HEADER -->
+
+        <div class="title">
+
+            <div class="ico">
+                ↔
+            </div>
+
+            <div>
+                <h2>Image Resizer</h2>
+
+                <p>
+                    Resize your image to any exact width and height.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- UPLOAD AREA -->
+
+        <div
+            class="upload"
+            id="dropZone"
+        >
+
+            <strong>
+                Select an image
+            </strong>
+
+            <span>
+                Drag & drop your image here
+                or choose a file from your device.
+            </span>
+
+            <button
+                class="primary"
+                id="chooseBtn"
+                type="button"
+            >
+                Choose Image
+            </button>
+
+            <input
+                id="fileInput"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                hidden
+            >
+
+        </div>
+
+
+        <!-- IMAGE PREVIEW -->
+
+        <div
+            class="preview"
+            id="preview"
+        >
+
+            <img
+                id="previewImg"
+                alt="Selected image preview"
+            >
+
+
+            <!-- IMAGE INFORMATION -->
+
+            <div
+                class="hint"
+                id="imageInfo"
+            >
+                Image information will appear here.
+            </div>
+
+
+            <!-- CONTROLS -->
+
+            <div class="controls">
+
+                <label>
+                    Width
+
+                    <input
+                        id="widthInput"
+                        type="number"
+                        min="1"
+                        placeholder="Width"
+                    >
+                </label>
+
+
+                <label>
+                    Height
+
+                    <input
+                        id="heightInput"
+                        type="number"
+                        min="1"
+                        placeholder="Height"
+                    >
+                </label>
+
+
+                <label>
+                    <input
+                        id="keepRatio"
+                        type="checkbox"
+                        checked
+                    >
+
+                    Keep ratio
+                </label>
+
+            </div>
+
+
+            <!-- QUICK SIZE -->
+
+            <div class="controls">
+
+                <select id="preset">
+
+                    <option value="">
+                        Quick size
+                    </option>
+
+                    <option value="1920x1080">
+                        1920 × 1080
+                    </option>
+
+                    <option value="1280x720">
+                        1280 × 720
+                    </option>
+
+                    <option value="1080x1080">
+                        1080 × 1080
+                    </option>
+
+                    <option value="1080x1350">
+                        1080 × 1350
+                    </option>
+
+                    <option value="1080x1920">
+                        1080 × 1920
+                    </option>
+
+                    <option value="800x600">
+                        800 × 600
+                    </option>
+
+                    <option value="640x480">
+                        640 × 480
+                    </option>
+
+                </select>
+
+
+                <select id="outputFormat">
+
+                    <option value="original">
+                        Original format
+                    </option>
+
+                    <option value="image/jpeg">
+                        JPG
+                    </option>
+
+                    <option value="image/png">
+                        PNG
+                    </option>
+
+                    <option value="image/webp">
+                        WEBP
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="controls">
+
+                <button
+                    class="download"
+                    id="resizeBtn"
+                    type="button"
+                >
+                    Resize & Download
+                </button>
+
+
+                <button
+                    class="back"
+                    id="resetBtn"
+                    type="button"
+                >
+                    Reset
+                </button>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div
+                class="hint"
+                id="result"
+            >
+                Your resized image will be downloaded to your device.
+            </div>
+
+        </div>
+
+
+        <!-- DEFAULT MESSAGE -->
+
+        <div
+            class="hint"
+            id="mainHint"
+        >
+            <b>How to use:</b>
+            Choose an image, enter the required dimensions,
+            then click <b>Resize & Download</b>.
+            Everything is processed locally in your browser.
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+    All Free Image Tools • Image Resizer
+</footer>
+
+
+<!-- THEME -->
+
+<script src="../assets/theme.js"></script>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const fileInput =
+    document.getElementById("fileInput");
+
+const chooseBtn =
+    document.getElementById("chooseBtn");
+
+const dropZone =
+    document.getElementById("dropZone");
+
+const preview =
+    document.getElementById("preview");
+
+const previewImg =
+    document.getElementById("previewImg");
+
+const widthInput =
+    document.getElementById("widthInput");
+
+const heightInput =
+    document.getElementById("heightInput");
+
+const keepRatio =
+    document.getElementById("keepRatio");
+
+const preset =
+    document.getElementById("preset");
+
+const outputFormat =
+    document.getElementById("outputFormat");
+
+const resizeBtn =
+    document.getElementById("resizeBtn");
+
+const resetBtn =
+    document.getElementById("resetBtn");
+
+const imageInfo =
+    document.getElementById("imageInfo");
+
+const result =
+    document.getElementById("result");
+
+const mainHint =
+    document.getElementById("mainHint");
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let selectedFile = null;
+
+let image = null;
+
+let originalWidth = 0;
+
+let originalHeight = 0;
+
+let aspectRatio = 1;
+
+
+/* =========================================================
+   CHOOSE IMAGE
+   ========================================================= */
+
+chooseBtn.addEventListener(
+    "click",
+    () => {
+        fileInput.click();
+    }
+);
+
+
+/* =========================================================
+   FILE SELECT
+   ========================================================= */
+
+fileInput.addEventListener(
+    "change",
+    event => {
+
+        const file =
+            event.target.files[0];
+
+        if (file) {
+            loadImage(file);
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOAD IMAGE
+   ========================================================= */
+
+function loadImage(file) {
+
+    if (!file.type.startsWith("image/")) {
+
+        showError(
+            "Please select a valid image file."
+        );
+
+        return;
+    }
+
+
+    selectedFile = file;
+
+
+    const objectURL =
+        URL.createObjectURL(file);
+
+
+    const img =
+        new Image();
+
+
+    img.onload = () => {
+
+        image = img;
+
+        originalWidth =
+            img.naturalWidth;
+
+        originalHeight =
+            img.naturalHeight;
+
+
+        aspectRatio =
+            originalWidth /
+            originalHeight;
+
+
+        previewImg.src =
+            objectURL;
+
+
+        widthInput.value =
+            originalWidth;
+
+        heightInput.value =
+            originalHeight;
+
+
+        preview.style.display =
+            "block";
+
+
+        dropZone.style.display =
+            "none";
+
+
+        imageInfo.innerHTML =
+            `
+            <b>${escapeHTML(file.name)}</b>
+            <br>
+            Original size:
+            ${originalWidth} × ${originalHeight}px
+            <br>
+            File size:
+            ${formatFileSize(file.size)}
+            <br>
+            Format:
+            ${escapeHTML(file.type)}
+            `;
+
+
+        result.innerHTML =
+            "Image loaded successfully. Choose your new dimensions.";
+
+    };
+
+
+    img.onerror = () => {
+
+        URL.revokeObjectURL(objectURL);
+
+        showError(
+            "Unable to read this image."
+        );
+
+    };
+
+
+    img.src =
+        objectURL;
+}
+
+
+/* =========================================================
+   KEEP ASPECT RATIO — WIDTH
+   ========================================================= */
+
+widthInput.addEventListener(
+    "input",
+    () => {
+
+        if (
+            !keepRatio.checked ||
+            !originalWidth ||
+            !originalHeight
+        ) {
+            return;
+        }
+
+
+        const width =
+            Number(widthInput.value);
+
+
+        if (width > 0) {
+
+            heightInput.value =
+                Math.round(
+                    width / aspectRatio
+                );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   KEEP ASPECT RATIO — HEIGHT
+   ========================================================= */
+
+heightInput.addEventListener(
+    "input",
+    () => {
+
+        if (
+            !keepRatio.checked ||
+            !originalWidth ||
+            !originalHeight
+        ) {
+            return;
+        }
+
+
+        const height =
+            Number(heightInput.value);
+
+
+        if (height > 0) {
+
+            widthInput.value =
+                Math.round(
+                    height * aspectRatio
+                );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   QUICK PRESETS
+   ========================================================= */
+
+preset.addEventListener(
+    "change",
+    () => {
+
+        if (!preset.value) {
+            return;
+        }
+
+
+        const parts =
+            preset.value.split("x");
+
+
+        const width =
+            Number(parts[0]);
+
+        const height =
+            Number(parts[1]);
+
+
+        widthInput.value =
+            width;
+
+        heightInput.value =
+            height;
+
+
+        /*
+         * Preset dimensions should be exact.
+         * Therefore disable ratio locking temporarily.
+         */
+
+        keepRatio.checked =
+            false;
+
+    }
+);
+
+
+/* =========================================================
+   DRAG ENTER
+   ========================================================= */
+
+[
+    "dragenter",
+    "dragover"
+].forEach(
+    eventName => {
+
+        dropZone.addEventListener(
+            eventName,
+            event => {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                dropZone.style.borderColor =
+                    "var(--primary)";
+
+                dropZone.style.background =
+                    "var(--primary-soft)";
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   DRAG LEAVE
+   ========================================================= */
+
+[
+    "dragleave",
+    "drop"
+].forEach(
+    eventName => {
+
+        dropZone.addEventListener(
+            eventName,
+            event => {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                dropZone.style.borderColor =
+                    "";
+
+                dropZone.style.background =
+                    "";
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   DROP
+   ========================================================= */
+
+dropZone.addEventListener(
+    "drop",
+    event => {
+
+        const file =
+            event.dataTransfer.files[0];
+
+
+        if (file) {
+            loadImage(file);
+        }
+
+    }
+);
+
+
+/* =========================================================
+   RESIZE
+   ========================================================= */
+
+resizeBtn.addEventListener(
+    "click",
+    resizeImage
+);
+
+
+function resizeImage() {
+
+    if (!image) {
+
+        showError(
+            "Please select an image first."
+        );
+
+        return;
+    }
+
+
+    const width =
+        Number(widthInput.value);
+
+    const height =
+        Number(heightInput.value);
+
+
+    /* Validate */
+
+    if (
+        !Number.isFinite(width) ||
+        !Number.isFinite(height) ||
+        width < 1 ||
+        height < 1
+    ) {
+
+        showError(
+            "Please enter valid width and height."
+        );
+
+        return;
+    }
+
+
+    /*
+     * Prevent accidental extremely large canvas
+     */
+
+    if (
+        width > 12000 ||
+        height > 12000
+    ) {
+
+        showError(
+            "Maximum supported dimension is 12000 × 12000 pixels."
+        );
+
+        return;
+    }
+
+
+    resizeBtn.disabled =
+        true;
+
+    resizeBtn.textContent =
+        "Processing...";
+
+
+    /*
+     * Use a small timeout so the browser
+     * can update the button before rendering.
+     */
+
+    setTimeout(
+        () => {
+
+            try {
+
+                const canvas =
+                    document.createElement(
+                        "canvas"
+                    );
+
+
+                canvas.width =
+                    width;
+
+                canvas.height =
+                    height;
+
+
+                const ctx =
+                    canvas.getContext(
+                        "2d"
+                    );
+
+
+                /*
+                 * Better image quality
+                 */
+
+                ctx.imageSmoothingEnabled =
+                    true;
+
+                ctx.imageSmoothingQuality =
+                    "high";
+
+
+                /*
+                 * Transparent background
+                 * for PNG / WEBP.
+                 *
+                 * JPG gets a white background.
+                 */
+
+                const format =
+                    getOutputFormat();
+
+
+                if (
+                    format ===
+                    "image/jpeg"
+                ) {
+
+                    ctx.fillStyle =
+                        "#ffffff";
+
+                    ctx.fillRect(
+                        0,
+                        0,
+                        width,
+                        height
+                    );
+
+                }
+
+
+                ctx.drawImage(
+                    image,
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+
+                /*
+                 * Download
+                 */
+
+                const quality =
+                    format ===
+                    "image/jpeg"
+                        ? 0.92
+                        : 0.95;
+
+
+                canvas.toBlob(
+                    blob => {
+
+                        if (!blob) {
+
+                            showError(
+                                "Image processing failed."
+                            );
+
+                            resetResizeButton();
+
+                            return;
+                        }
+
+
+                        downloadBlob(
+                            blob,
+                            createFileName(
+                                width,
+                                height,
+                                format
+                            )
+                        );
+
+
+                        result.innerHTML =
+                            `
+                            <b>Done!</b>
+                            Resized image:
+                            ${width} × ${height}px
+                            <br>
+                            Output size:
+                            ${formatFileSize(blob.size)}
+                            `;
+
+
+                        resetResizeButton();
+
+                    },
+                    format,
+                    quality
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                showError(
+                    "Something went wrong while resizing the image."
+                );
+
+                resetResizeButton();
+
+            }
+
+        },
+        50
+    );
+}
+
+
+/* =========================================================
+   OUTPUT FORMAT
+   ========================================================= */
+
+function getOutputFormat() {
+
+    if (
+        outputFormat.value !==
+        "original"
+    ) {
+
+        return outputFormat.value;
+    }
+
+
+    /*
+     * Keep original supported format.
+     */
+
+    if (
+        selectedFile &&
+        [
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+        ].includes(
+            selectedFile.type
+        )
+    ) {
+
+        return selectedFile.type;
+    }
+
+
+    return "image/png";
+}
+
+
+/* =========================================================
+   DOWNLOAD
+   ========================================================= */
+
+function downloadBlob(
+    blob,
+    filename
+) {
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href =
+        url;
+
+    link.download =
+        filename;
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    setTimeout(
+        () => {
+            URL.revokeObjectURL(url);
+        },
+        1000
+    );
+}
+
+
+/* =========================================================
+   FILE NAME
+   ========================================================= */
+
+function createFileName(
+    width,
+    height,
+    format
+) {
+
+    const baseName =
+        selectedFile
+            ? selectedFile.name
+                .replace(
+                    /\.[^/.]+$/,
+                    ""
+                )
+            : "image";
+
+
+    let extension =
+        "png";
+
+
+    if (
+        format ===
+        "image/jpeg"
+    ) {
+
+        extension =
+            "jpg";
+
+    } else if (
+        format ===
+        "image/webp"
+    ) {
+
+        extension =
+            "webp";
+    }
+
+
+    return (
+        baseName +
+        "-" +
+        width +
+        "x" +
+        height +
+        "." +
+        extension
+    );
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+resetBtn.addEventListener(
+    "click",
+    resetTool
+);
+
+
+function resetTool() {
+
+    selectedFile =
+        null;
+
+    image =
+        null;
+
+    originalWidth =
+        0;
+
+    originalHeight =
+        0;
+
+    aspectRatio =
+        1;
+
+
+    fileInput.value =
+        "";
+
+
+    previewImg.src =
+        "";
+
+
+    widthInput.value =
+        "";
+
+    heightInput.value =
+        "";
+
+
+    preset.value =
+        "";
+
+
+    outputFormat.value =
+        "original";
+
+
+    keepRatio.checked =
+        true;
+
+
+    preview.style.display =
+        "none";
+
+
+    dropZone.style.display =
+        "";
+
+
+    imageInfo.innerHTML =
+        "Image information will appear here.";
+
+
+    result.innerHTML =
+        "Your resized image will be downloaded to your device.";
