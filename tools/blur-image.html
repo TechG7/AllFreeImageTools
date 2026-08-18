@@ -1,1 +1,145 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Blur Image — Pixora Rocket</title><link rel="stylesheet" href="../assets/style.css"></head><body><header class="top"><div class="logo"><b>✦</b> Pixora Rocket</div><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#tools">All Tools</a><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav></header><main class="wrap"><section class="tool"><a href="../index.html"><button class="back">← Back to All Tools</button></a><div class="panel"><div class="title"><div class="ico">◌</div><div><h2>Blur Image</h2><p>Apply blur effects</p></div></div><div class="upload"><strong>Select an image for Blur Image</strong>Choose or drag & drop an image here<br><button class="primary" onclick="document.getElementById('file').click()">Choose Image</button><input id="file" hidden type="file" accept="image/*"></div><div class="preview" id="preview"><img id="previewImg"><div class="controls"><label>Blur</label><input id="BLUR" type="range" min="1" max="25" value="8"><button class="download" onclick="blurTool()">Apply & Download</button></div></div><div class="hint" id="hint">This is the dedicated <b>Blur Image</b> workspace. This file is independent from the main website.</div></div></section></main><footer>Pixora Rocket • Blur Image</footer><script src="../assets/theme.js"></script><script src="../assets/common.js"></script><script>document.getElementById("file").onchange=e=>loadFile(e.target.files[0]);</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Image Blur - All Free Image Tools</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="logo"><b>✦</b> All Free Image Tools</div><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#tools">All Tools</a><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav></header>
+
+<main class="wrap"><section class="tool">
+<a href="../index.html"><button class="back">← Back to All Tools</button></a>
+
+<div class="panel">
+<div class="title"><div class="ico">◌</div><div><h2>Advanced Image Blur</h2><p>Blur the whole image or apply blur to a selected area.</p></div></div>
+
+<div class="upload" id="dropZone">
+<strong>Upload your image</strong>
+<span>Drag & drop JPG, PNG or WEBP here.</span>
+<button class="primary" id="choose">Choose Image</button>
+<input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+</div>
+
+<div class="preview" id="preview">
+<div style="text-align:center"><canvas id="canvas" style="max-width:100%;border-radius:12px;cursor:crosshair"></canvas></div>
+
+<div class="controls">
+<label>Mode<select id="mode"><option value="whole">Whole Image</option><option value="area">Selected Area</option></select></label>
+<label>Effect<select id="effect"><option value="blur">Blur</option><option value="pixel">Pixelate</option></select></label>
+</div>
+
+<div class="controls">
+<label style="flex:1">Intensity<input id="intensity" type="range" min="1" max="30" value="10"></label><strong id="iv">10</strong>
+<label style="flex:1">Zoom<input id="zoom" type="range" min="1" max="2" step=".01" value="1"></label><strong id="zv">100%</strong>
+</div>
+
+<div class="controls">
+<button class="back" id="clear">Clear Selection</button>
+<button class="download" id="download">Blur & Download</button>
+<button class="back" id="reset">Reset</button>
+</div>
+
+<div class="hint" id="result">Upload an image to begin.</div>
+</div>
+
+<div class="hint"><b>How to Use:</b><br><br><b>1. Upload:</b> Select an image or drag it into the upload area.<br><br><b>2. Select Mode:</b> Choose <b>Whole Image</b> to blur everything or <b>Selected Area</b> to blur only a specific part.<br><br><b>3. Choose Effect:</b> Select Blur for a smooth effect or Pixelate for a block-style effect.<br><br><b>4. Select Area:</b> In Selected Area mode, drag over the part of the image you want to edit.<br><br><b>5. Intensity:</b> Increase the slider for a stronger effect.<br><br><b>6. Download:</b> Click <b>Blur & Download</b> to save the processed image.</div>
+</div>
+
+<div class="panel" style="margin-top:20px">
+<div class="title"><div class="ico">i</div><div><h2>About Image Blur</h2><p>Quickly blur or pixelate image areas.</p></div></div>
+<div class="hint"><p><b>Advanced Image Blur</b> provides two editing modes. Whole Image applies the effect across the complete image, while Selected Area lets you choose a specific rectangular region.</p><p>Pixelate mode creates a block-style effect that can be useful for intentionally obscuring visual details.</p><p>The original image remains unchanged.</p></div>
+
+<div class="title" style="margin-top:20px"><div class="ico">✓</div><div><h2>Features</h2><p>Simple but powerful blur controls.</p></div></div>
+<div class="hint">✓ Whole image blur<br><br>✓ Selected area blur<br><br>✓ Pixelate effect<br><br>✓ Adjustable intensity<br><br>✓ Zoom preview<br><br>✓ Rectangle selection<br><br>✓ Clear selection<br><br>✓ JPG / PNG / WEBP export<br><br>✓ Drag & drop upload<br><br>✓ Browser-based processing</div>
+
+<div class="title" style="margin-top:20px"><div class="ico">★</div><div><h2>Helpful Tips</h2><p>Get the effect you want.</p></div></div>
+<div class="hint"><p><b>Tip 1:</b> Use Whole Image when you want a soft overall effect.</p><p><b>Tip 2:</b> Use Selected Area when only one part needs editing.</p><p><b>Tip 3:</b> Increase intensity gradually to avoid over-blurring.</p><p><b>Tip 4:</b> Pixelate creates a stronger block effect than normal blur.</p></div>
+
+<div class="title" style="margin-top:20px"><div class="ico">?</div><div><h2>FAQ</h2><p>Common questions.</p></div></div>
+<div class="hint"><p><b>Can I blur only one area?</b><br>Yes. Select Selected Area and drag over the required region.</p><p><b>Can I pixelate?</b><br>Yes. Select Pixelate from the Effect menu.</p><p><b>Does the original image change?</b><br>No. A new processed image is created.</p><p><b>Can I adjust blur strength?</b><br>Yes. Use the Intensity slider.</p><p><b>Are images uploaded?</b><br>No server upload is required for processing.</p></div>
+
+<div class="title" style="margin-top:20px"><div class="ico">🔒</div><div><h2>Privacy</h2><p>Local browser processing.</p></div></div>
+<div class="hint">The blur operation is performed locally in your browser. Your selected image is not intentionally uploaded to a remote server.</div>
+</div>
+</section></main>
+
+<footer>All Free Image Tools • Advanced Image Blur</footer>
+<script src="../assets/theme.js"></script>
+<script>
+const $=id=>document.getElementById(id),file=$("file"),choose=$("choose"),zone=$("dropZone"),preview=$("preview"),canvas=$("canvas"),ctx=canvas.getContext("2d"),mode=$("mode"),effect=$("effect"),intensity=$("intensity"),zoom=$("zoom"),iv=$("iv"),zv=$("zv"),clear=$("clear"),download=$("download"),reset=$("reset"),result=$("result");let image=null,selected=null,box=null,start=null,drag=false;
+
+choose.onclick=()=>file.click();
+file.onchange=e=>{if(e.target.files[0])load(e.target.files[0])};
+["dragenter","dragover"].forEach(x=>zone.addEventListener(x,e=>{e.preventDefault();zone.style.borderColor="var(--primary)"}));
+zone.addEventListener("dragleave",()=>zone.style.borderColor="");
+zone.addEventListener("drop",e=>{e.preventDefault();zone.style.borderColor="";let f=[...e.dataTransfer.files].find(x=>x.type.startsWith("image/"));if(f)load(f)});
+
+function load(f){
+if(!f.type.startsWith("image/"))return error("Please select a valid image.");
+selected=f;
+let u=URL.createObjectURL(f),i=new Image();
+i.onload=()=>{image=i;preview.style.display="block";zone.style.display="none";fit();result.innerHTML="<b>"+esc(f.name)+"</b><br>Original size: "+size(f.size)+"<br>Dimensions: "+i.naturalWidth+" × "+i.naturalHeight+" px";URL.revokeObjectURL(u)};
+i.onerror=()=>error("Unable to load image.");i.src=u;
+}
+
+function fit(){let max=1000,s=Math.min(1,max/image.naturalWidth,max/image.naturalHeight);canvas.width=Math.round(image.naturalWidth*s);canvas.height=Math.round(image.naturalHeight*s);box=null;draw()}
+
+function draw(){
+if(!image)return;
+ctx.clearRect(0,0,canvas.width,canvas.height);
+if(mode.value==="whole"){applyWhole()}else{ctx.drawImage(image,0,0,canvas.width,canvas.height);if(box)applyArea()}
+if(box&&mode.value==="area"){ctx.save();ctx.strokeStyle="#fff";ctx.lineWidth=2;ctx.setLineDash([6,4]);ctx.strokeRect(box.x,box.y,box.w,box.h);ctx.restore()}
+}
+
+function applyWhole(){
+if(effect.value==="blur"){ctx.filter="blur("+intensity.value+"px)";ctx.drawImage(image,0,0,canvas.width,canvas.height);ctx.filter="none"}
+else pixelate(0,0,canvas.width,canvas.height)
+}
+
+function applyArea(){
+if(effect.value==="blur"){
+let off=document.createElement("canvas");off.width=canvas.width;off.height=canvas.height;let o=off.getContext("2d");o.filter="blur("+intensity.value+"px)";o.drawImage(image,0,0,canvas.width,canvas.height);o.filter="none";ctx.save();ctx.beginPath();ctx.rect(box.x,box.y,box.w,box.h);ctx.clip();ctx.drawImage(off,0,0);ctx.restore()
+}else pixelate(box.x,box.y,box.w,box.h)
+}
+
+function pixelate(x,y,w,h){
+let p=Math.max(2,+intensity.value),sx=Math.max(0,Math.floor(x)),sy=Math.max(0,Math.floor(y)),sw=Math.min(canvas.width-sx,Math.floor(w)),sh=Math.min(canvas.height-sy,Math.floor(h));
+if(sw<2||sh<2)return;
+let small=document.createElement("canvas"),scale=Math.max(2,Math.round(p/2));small.width=Math.max(1,Math.ceil(sw/scale));small.height=Math.max(1,Math.ceil(sh/scale));let s=small.getContext("2d");s.imageSmoothingEnabled=false;s.drawImage(image,sx*(image.naturalWidth/canvas.width),sy*(image.naturalHeight/canvas.height),sw*(image.naturalWidth/canvas.width),sh*(image.naturalHeight/canvas.height),0,0,small.width,small.height);ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(small,0,0,small.width,small.height,sx,sy,sw,sh);ctx.restore()
+}
+
+canvas.addEventListener("pointerdown",e=>{if(mode.value!=="area")return;let p=pos(e);start=p;box={x:p.x,y:p.y,w:0,h:0};drag=true});
+canvas.addEventListener("pointermove",e=>{if(!drag)return;let p=pos(e);box={x:Math.min(start.x,p.x),y:Math.min(start.y,p.y),w:Math.abs(p.x-start.x),h:Math.abs(p.y-start.y)};draw()});
+canvas.addEventListener("pointerup",()=>{drag=false;if(box&&box.w>2&&box.h>2)result.textContent="Selected area ready. Click Blur & Download."});
+
+function pos(e){let r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}}
+
+mode.onchange=()=>{box=null;draw();result.textContent=mode.value==="area"?"Drag over an area to select it.":"Whole image mode selected."};
+effect.onchange=draw;
+intensity.oninput=()=>{iv.textContent=intensity.value;draw()};
+zoom.oninput=()=>{zv.textContent=Math.round(+zoom.value*100)+"%";draw()};
+clear.onclick=()=>{box=null;draw();result.textContent="Selection cleared."};
+
+download.onclick=()=>{
+if(!image)return error("Please upload an image first.");
+if(mode.value==="area"&&(!box||box.w<3||box.h<3))return error("Please select an area first.");
+download.disabled=true;download.textContent="Processing...";
+let out=document.createElement("canvas");out.width=image.naturalWidth;out.height=image.naturalHeight;let o=out.getContext("2d");o.drawImage(canvas,0,0,out.width,out.height);
+if(mode.value==="whole"){if(effect.value==="blur"){o.clearRect(0,0,out.width,out.height);o.filter="blur("+(+intensity.value*(out.width/canvas.width))+"px)";o.drawImage(image,0,0,out.width,out.height);o.filter="none"}else{let scale=out.width/canvas.width,xx=box?box.x*scale:0}}
+else if(box){
+let scale=out.width/canvas.width,x=box.x*scale,y=box.y*scale,w=box.w*scale,h=box.h*scale;
+if(effect.value==="blur"){let temp=document.createElement("canvas");temp.width=out.width;temp.height=out.height;let t=temp.getContext("2d");t.filter="blur("+(+intensity.value*scale)+"px)";t.drawImage(image,0,0,out.width,out.height);t.filter="none";o.save();o.beginPath();o.rect(x,y,w,h);o.clip();o.drawImage(temp,0,0);o.restore()}
+else{let temp=document.createElement("canvas"),sc=Math.max(2,+intensity.value);temp.width=Math.max(1,Math.floor(w/sc));temp.height=Math.max(1,Math.floor(h/sc));let t=temp.getContext("2d");t.imageSmoothingEnabled=false;t.drawImage(image,x,y,w,h,0,0,temp.width,temp.height);o.save();o.imageSmoothingEnabled=false;o.drawImage(temp,0,0,temp.width,temp.height,x,y,w,h);o.restore()}
+}
+out.toBlob(b=>{if(!b)return error("Export failed.");let u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=selected.name.replace(/\.[^/.]+$/,"")+"-blurred.jpg";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);result.innerHTML="<b>✓ Blur Complete!</b><br>Output size: "+size(b.size)+"<br>Dimensions: "+out.width+" × "+out.height+"px";download.disabled=false;download.textContent="Blur & Download"},"image/jpeg",.92)
+};
+
+reset.onclick=()=>{file.value="";image=null;selected=null;box=null;preview.style.display="none";zone.style.display="";mode.value="whole";effect.value="blur";intensity.value=10;zoom.value=1;iv.textContent="10";zv.textContent="100%";result.textContent="Upload an image to begin.";download.disabled=false;download.textContent="Blur & Download"};
+
+function size(n){if(!n)return"0 B";let u=["B","KB","MB","GB"],i=Math.min(Math.floor(Math.log(n)/Math.log(1024)),3);return(n/1024**i).toFixed(i?2:0)+" "+u[i]}
+function error(m){result.innerHTML='<b style="color:var(--danger)">'+esc(m)+"</b>";download.disabled=false;download.textContent="Blur & Download"}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+</script>
+</body>
+</html>
