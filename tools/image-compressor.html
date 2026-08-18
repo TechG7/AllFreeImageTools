@@ -1,1 +1,158 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Image Compressor — Pixora Rocket</title><link rel="stylesheet" href="../assets/style.css"></head><body><header class="top"><div class="logo"><b>✦</b> Pixora Rocket</div><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#tools">All Tools</a><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav></header><main class="wrap"><section class="tool"><a href="../index.html"><button class="back">← Back to All Tools</button></a><div class="panel"><div class="title"><div class="ico">▣</div><div><h2>Image Compressor</h2><p>Reduce image file size</p></div></div><div class="upload"><strong>Select an image for Image Compressor</strong>Choose or drag & drop an image here<br><button class="primary" onclick="document.getElementById('file').click()">Choose Image</button><input id="file" hidden type="file" accept="image/*"></div><div class="preview" id="preview"><img id="previewImg"><div class="controls"><label>Quality</label><input id="Q" type="range" min=".1" max="1" step=".05" value=".7"><button class="download" onclick="compressTool()">Compress & Download</button></div></div><div class="hint" id="hint">This is the dedicated <b>Image Compressor</b> workspace. This file is independent from the main website.</div></div></section></main><footer>Pixora Rocket • Image Compressor</footer><script src="../assets/theme.js"></script><script src="../assets/common.js"></script><script>document.getElementById("file").onchange=e=>loadFile(e.target.files[0]);</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Image Compressor - All Free Image Tools</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="top"><div class="logo"><b>✦</b> All Free Image Tools</div><nav class="nav"><a href="../index.html">Home</a><a href="../index.html#tools">All Tools</a><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav></header>
+
+<main class="wrap"><section class="tool">
+<a href="../index.html"><button class="back">← Back to All Tools</button></a>
+
+<div class="panel">
+<div class="title"><div class="ico">◉</div><div><h2>Advanced Image Compressor</h2><p>Compress your image to a specific KB or MB size.</p></div></div>
+
+<div class="upload" id="dropZone">
+<strong>Upload your image</strong>
+<span>Drag & drop JPG, PNG or WEBP here.</span>
+<button class="primary" id="choose">Choose Image</button>
+<input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+</div>
+
+<div class="preview" id="preview">
+<img id="img" alt="Image Preview">
+<div class="hint" id="info">Image information</div>
+
+<div class="controls">
+<label>Target Size<input id="target" type="number" min="1" step="0.01" placeholder="Example: 500"></label>
+<label>Unit<select id="unit"><option value="KB">KB</option><option value="MB">MB</option></select></label>
+</div>
+
+<div class="controls">
+<label style="flex:1">Quality <input id="quality" type="range" min="10" max="100" value="85"></label>
+<strong id="qualityValue">85%</strong>
+</div>
+
+<div class="controls">
+<select id="format"><option value="image/jpeg">JPG</option><option value="image/webp">WEBP</option><option value="image/png">PNG</option></select>
+</div>
+
+<div class="controls">
+<button class="download" id="compress">Compress & Download</button>
+<button class="back" id="reset">Reset</button>
+</div>
+
+<div class="hint" id="result">Upload an image and enter your target size.</div>
+</div>
+
+<div class="hint"><b>How to Use:</b><br><br><b>1. Upload:</b> Choose an image or drag it into the upload area.<br><br><b>2. Check Original Size:</b> The original file size will be displayed automatically.<br><br><b>3. Enter Target Size:</b> Enter the maximum size you want, for example <b>500 KB</b> or <b>1 MB</b>.<br><br><b>4. Select Format:</b> JPG and WEBP are recommended for strong compression.<br><br><b>5. Adjust Quality:</b> Lower quality generally produces a smaller file.<br><br><b>6. Compress:</b> Click <b>Compress & Download</b>. The tool will try to reach your target size automatically.</div>
+</div>
+
+<div class="panel" style="margin-top:20px">
+<div class="title"><div class="ico">i</div><div><h2>About Image Compressor</h2><p>Reduce image file size while keeping useful visual quality.</p></div></div>
+<div class="hint">
+<p><b>Advanced Image Compressor</b> is designed to reduce the file size of images for websites, forms, documents, social media and sharing.</p>
+<p>The tool shows the <b>original file size</b> after upload and lets you enter a <b>manual target size in KB or MB</b>.</p>
+<p>The compressor uses browser-based processing. Your selected image is processed locally in your browser.</p>
+</div>
+
+<div class="title" style="margin-top:20px"><div class="ico">📊</div><div><h2>Compression Information</h2><p>Understand your result.</p></div></div>
+<div class="hint">
+<p><b>Original Size:</b> Size of the image before compression.</p>
+<p><b>Target Size:</b> Maximum size you requested.</p>
+<p><b>Output Size:</b> Actual size of the compressed file.</p>
+<p><b>Saved:</b> Difference between original and output size.</p>
+<p><b>Reduction:</b> Percentage of file size reduced.</p>
+</div>
+
+<div class="title" style="margin-top:20px"><div class="ico">✓</div><div><h2>Features</h2><p>Advanced compression controls.</p></div></div>
+<div class="hint">✓ Manual KB/MB target size<br><br>✓ Original file size detection<br><br>✓ Actual output size detection<br><br>✓ Compression percentage<br><br>✓ Quality control<br><br>✓ JPG / WEBP / PNG output<br><br>✓ Drag & drop<br><br>✓ Browser-based processing<br><br>✓ Automatic download<br><br>✓ Mobile friendly</div>
+
+<div class="title" style="margin-top:20px"><div class="ico">★</div><div><h2>Helpful Tips</h2><p>Get better compression results.</p></div></div>
+<div class="hint">
+<p><b>Tip 1:</b> JPG or WEBP usually provides better compression for photographs.</p>
+<p><b>Tip 2:</b> If the target is very small, image quality may need to be reduced.</p>
+<p><b>Tip 3:</b> PNG may not reach a very small target size because it uses lossless compression.</p>
+<p><b>Tip 4:</b> For normal photos, start around 75–90% quality.</p>
+</div>
+
+<div class="title" style="margin-top:20px"><div class="ico">?</div><div><h2>FAQ</h2><p>Common questions.</p></div></div>
+<div class="hint">
+<p><b>Can I enter 500 KB manually?</b><br>Yes. Enter <b>500</b> and select KB.</p>
+<p><b>Can I enter 2 MB?</b><br>Yes. Enter <b>2</b> and select MB.</p>
+<p><b>Will the output always be exactly the target size?</b><br>The compressor tries to stay at or below the target. Exact byte-level matching is not guaranteed for every image format.</p>
+<p><b>Which format is best for photos?</b><br>JPG or WEBP is generally suitable.</p>
+<p><b>Are my images uploaded?</b><br>No server upload is required for the compression process; processing happens in your browser.</p>
+</div>
+
+<div class="title" style="margin-top:20px"><div class="ico">🔒</div><div><h2>Privacy</h2><p>Your image stays in your browser during processing.</p></div></div>
+<div class="hint">This tool performs image compression locally using browser APIs. Your selected image is not intentionally sent to a remote server by this page.</div>
+</div>
+</section></main>
+
+<footer>All Free Image Tools • Advanced Image Compressor</footer>
+<script src="../assets/theme.js"></script>
+
+<script>
+const $=id=>document.getElementById(id),file=$("file"),choose=$("choose"),zone=$("dropZone"),preview=$("preview"),img=$("img"),target=$("target"),unit=$("unit"),quality=$("quality"),qualityValue=$("qualityValue"),format=$("format"),compress=$("compress"),reset=$("reset"),info=$("info"),result=$("result");let source=null,selected=null;
+
+choose.onclick=()=>file.click();
+file.onchange=e=>{if(e.target.files[0])load(e.target.files[0])};
+quality.oninput=()=>qualityValue.textContent=quality.value+"%";
+
+function load(f){
+if(!f.type.startsWith("image/"))return error("Please select a valid image.");
+selected=f;
+let u=URL.createObjectURL(f),i=new Image();
+i.onload=()=>{
+source=i;img.src=u;preview.style.display="block";zone.style.display="none";
+info.innerHTML="<b>"+esc(f.name)+"</b><br>Dimensions: "+i.naturalWidth+" × "+i.naturalHeight+"px<br>Original Size: <b>"+size(f.size)+"</b><br>Format: "+esc(f.type);
+result.innerHTML="Original image size: <b>"+size(f.size)+"</b>. Enter your target size.";
+};
+i.onerror=()=>error("Unable to load image.");i.src=u;
+}
+
+["dragenter","dragover"].forEach(x=>zone.addEventListener(x,e=>{e.preventDefault();zone.style.borderColor="var(--primary)"}));
+zone.addEventListener("dragleave",()=>zone.style.borderColor="");
+zone.addEventListener("drop",e=>{e.preventDefault();zone.style.borderColor="";if(e.dataTransfer.files[0])load(e.dataTransfer.files[0])});
+
+compress.onclick=async()=>{
+if(!source)return error("Please upload an image first.");
+let n=+target.value;
+if(!n||n<=0)return error("Enter a valid target size.");
+let bytes=n*(unit.value==="MB"?1024*1024:1024);
+compress.disabled=true;compress.textContent="Compressing...";
+let type=format.value,base=Math.max(.05,+quality.value/100),best=null;
+for(let q=base;q>=.05;q-=.05){
+let b=await makeBlob(type,q);
+if(!best||b.size<best.size)best=b;
+if(b.size<=bytes)break;
+}
+if(!best)return error("Compression failed.");
+let pct=Math.max(0,(1-best.size/selected.size)*100),saved=Math.max(0,selected.size-best.size);
+let ext=type==="image/webp"?"webp":type==="image/png"?"png":"jpg";
+let name=selected.name.replace(/\.[^/.]+$/,"")+"-compressed."+ext;
+let u=URL.createObjectURL(best),a=document.createElement("a");a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);
+result.innerHTML="<b>✓ Compression Complete</b><br><br>Original: <b>"+size(selected.size)+"</b><br>Target: <b>"+size(bytes)+"</b><br>Output: <b>"+size(best.size)+"</b><br>Saved: <b>"+size(saved)+"</b><br>Reduction: <b>"+pct.toFixed(1)+"%</b>"+(best.size>bytes?"<br><br>⚠ Target could not be reached at the selected format/settings. Try WEBP or a lower quality.":"");
+compress.disabled=false;compress.textContent="Compress & Download";
+};
+
+function makeBlob(type,q){
+return new Promise(resolve=>{
+let c=document.createElement("canvas"),x=c.getContext("2d");c.width=source.naturalWidth;c.height=source.naturalHeight;
+if(type==="image/jpeg"){x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height)}
+x.drawImage(source,0,0);c.toBlob(resolve,type,q);
+});
+}
+
+reset.onclick=()=>{file.value="";source=null;selected=null;img.src="";target.value="";quality.value=85;qualityValue.textContent="85%";format.value="image/jpeg";preview.style.display="none";zone.style.display="";info.textContent="Image information";result.textContent="Upload an image and enter your target size.";compress.disabled=false;compress.textContent="Compress & Download"};
+
+function size(n){if(!n)return"0 B";let u=["B","KB","MB","GB"],i=Math.min(Math.floor(Math.log(n)/Math.log(1024)),3);return(n/1024**i).toFixed(i?2:0)+" "+u[i]}
+function error(m){result.innerHTML='<b style="color:var(--danger)">'+esc(m)+"</b>";compress.disabled=false;compress.textContent="Compress & Download"}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+</script>
+</body>
+</html>
