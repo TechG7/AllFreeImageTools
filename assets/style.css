@@ -1299,3 +1299,109 @@ body {
     background-position: center;
     border: 2px solid #e0e0e0;
 }
+/* Body Theme to match the reference look */
+body {
+    background: #e8e4dc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c2c2c;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* Base Card Style with Glassmorphism & Unique Colors */
+.grid .card {
+    border-radius: 18px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 140px;
+    transition: transform 0.2s ease;
+}
+
+.grid .card:hover {
+    transform: translateY(-4px);
+}
+
+/* Assigning different soft-vibrant colors like the reference image */
+.grid .card:nth-child(4n+1) {
+    background: linear-gradient(135deg, rgba(43, 115, 126, 0.85), rgba(74, 131, 142, 0.85));
+    color: #fff;
+}
+
+.grid .card:nth-child(4n+2) {
+    background: linear-gradient(135deg, rgba(53, 133, 108, 0.85), rgba(93, 168, 120, 0.85));
+    color: #fff;
+}
+
+.grid .card:nth-child(4n+3) {
+    background: linear-gradient(135deg, rgba(168, 77, 85, 0.85), rgba(192, 102, 102, 0.85));
+    color: #fff;
+}
+
+.grid .card:nth-child(4n+4) {
+    background: linear-gradient(135deg, rgba(110, 84, 140, 0.85), rgba(143, 105, 175, 0.85));
+    color: #fff;
+}
+
+/* Ensuring text inside cards stays white for readability */
+.grid .card h3, 
+.grid .card p {
+    color: #ffffff !important;
+    margin: 0 0 6px 0;
+}
+
+.grid .card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.grid .card p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* Icon box styling inside card */
+.grid .card .ico {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* "Use Tool" Button styling matching the image pill buttons */
+.grid .card .use {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 12px;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.grid .card .use:hover {
+    background: rgba(255, 255, 255, 0.45);
+}
