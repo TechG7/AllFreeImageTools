@@ -1405,3 +1405,106 @@ body {
 .grid .card .use:hover {
     background: rgba(255, 255, 255, 0.45);
 }
+/* Body aur background theme */
+body {
+    background: #e8e4dc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c2c2c;
+}
+
+/* Proper Grid Layout jo stretch nahi hoga */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* Card Styling */
+.grid .card {
+    border-radius: 16px;
+    padding: 18px;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 110px;
+}
+
+/* Unique Soft Gradients for Cards */
+.grid .card:nth-child(4n+1) {
+    background: linear-gradient(135deg, #2b737e, #4a838e);
+    color: #fff;
+}
+
+.grid .card:nth-child(4n+2) {
+    background: linear-gradient(135deg, #35856c, #5da878);
+    color: #fff;
+}
+
+.grid .card:nth-child(4n+3) {
+    background: linear-gradient(135deg, #a84d55, #c06666);
+    color: #fff;
+}
+
+.grid .card:nth-child(4n+4) {
+    background: linear-gradient(135deg, #6e548c, #8f69af);
+    color: #fff;
+}
+
+/* Text Formatting */
+.grid .card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #ffffff !important;
+}
+
+.grid .card p {
+    font-size: 0.75rem;
+    margin: 0 0 12px 0;
+    opacity: 0.85;
+    color: #ffffff !important;
+}
+
+/* Top-Right Icon Box */
+.grid .card .ico {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+/* "Use Tool" Button Styling */
+.grid .card .use {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-align: center;
+    width: 100%;
+}
+
+.grid .card .use:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
