@@ -2,7 +2,7 @@ const CACHE_NAME="all-free-image-tools-v1";
 const ASSETS=[
   "./",
   "./index.html",
-  "./style.css",
+  "./assets/style.css",
   "./manifest.json",
   "./logo-192.png",
   "./logo-512.png"
