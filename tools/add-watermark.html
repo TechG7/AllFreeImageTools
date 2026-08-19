@@ -12,54 +12,54 @@
 <a href="../index.html"><button class="back">← Back to All Tools</button></a>
 
 <div class="panel">
-<div class="title"><div class="ico">◆</div><div><h2>Advanced Image Watermark</h2><p>Add professional text or logo watermarks to your images.</p></div></div>
+<div class="title"><div class="ico">◆</div><div><h2>Advanced Image Watermark</h2><p>Add text or logo watermarks with professional controls.</p></div></div>
 
-<div class="upload" id="dropZone">
-<strong>Upload your image</strong><span>Drag & drop JPG, PNG or WEBP here.</span>
-<button class="primary" id="choose">Choose Image</button>
+<div class="upload" id="zone">
+<strong>Upload your image</strong><span>JPG, PNG or WEBP • Drag & Drop supported</span>
+<button class="primary" onclick="file.click()">Choose Image</button>
 <input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden>
 </div>
 
 <div class="preview" id="preview">
-<div style="text-align:center"><canvas id="canvas" style="max-width:100%;border-radius:12px"></canvas></div>
-
-<div class="controls">
-<label>Watermark Type<select id="type"><option value="text">Text Watermark</option><option value="logo">Logo / Image</option></select></label>
-<label>Position<select id="position"><option value="center">Center</option><option value="tl">Top Left</option><option value="tc">Top Center</option><option value="tr">Top Right</option><option value="ml">Middle Left</option><option value="mr">Middle Right</option><option value="bl">Bottom Left</option><option value="bc">Bottom Center</option><option value="br">Bottom Right</option></select></label>
-</div>
-
-<div id="textBox">
-<div class="controls">
-<label style="flex:1">Watermark Text<input id="text" type="text" placeholder="© All Free Image Tools" value="© All Free Image Tools"></label>
-</div>
-<div class="controls">
-<label>Text Color<input id="color" type="color" value="#ffffff"></label>
-<label>Font<select id="font"><option>Arial</option><option>Georgia</option><option>Verdana</option><option>Times New Roman</option><option>Courier New</option></select></label>
-</div>
-</div>
-
-<div id="logoBox" style="display:none">
-<div class="upload" style="margin-top:10px">
-<strong>Select watermark logo</strong>
-<span>PNG is recommended for transparent logos.</span>
-<button class="primary" id="logoChoose">Choose Logo</button>
-<input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp" hidden>
-</div>
+<div style="background:rgba(127,127,127,.08);padding:12px;border-radius:14px;text-align:center;overflow:auto">
+<canvas id="canvas" style="max-width:100%;border-radius:12px"></canvas>
 </div>
 
 <div class="controls">
-<label style="flex:1">Size<input id="size" type="range" min="10" max="300" value="60"></label><strong id="sizeValue">60</strong>
-<label style="flex:1">Opacity<input id="opacity" type="range" min="5" max="100" value="65"></label><strong id="opacityValue">65%</strong>
+<label>Watermark<select id="kind"><option value="text">Text</option><option value="logo">Logo / Image</option></select></label>
+<label>Position<select id="pos"><option value="center">Center</option><option value="tl">Top Left</option><option value="tc">Top Center</option><option value="tr">Top Right</option><option value="ml">Middle Left</option><option value="mr">Middle Right</option><option value="bl">Bottom Left</option><option value="bc">Bottom Center</option><option value="br">Bottom Right</option></select></label>
+</div>
+
+<div id="textControls">
+<div class="controls">
+<label style="flex:1">Watermark Text<input id="txt" value="© All Free Image Tools"></label>
+<label>Color<input id="clr" type="color" value="#ffffff"></label>
+</div>
+<div class="controls">
+<label>Font<select id="font"><option>Arial</option><option>Verdana</option><option>Georgia</option><option>Times New Roman</option><option>Courier New</option><option>Impact</option></select></label>
+<label><input id="bold" type="checkbox" checked> Bold</label>
+<label><input id="italic" type="checkbox"> Italic</label>
+</div>
+</div>
+
+<div id="logoControls" style="display:none">
+<div class="upload"><strong>Choose watermark logo</strong><span>Transparent PNG recommended.</span><button class="primary" onclick="logoFile.click()">Choose Logo</button><input id="logoFile" type="file" accept="image/*" hidden></div>
 </div>
 
 <div class="controls">
-<label style="flex:1">Rotation<input id="rotation" type="range" min="-180" max="180" value="0"></label><strong id="rotationValue">0°</strong>
+<label style="flex:1">Size<input id="sz" type="range" min="10" max="300" value="60"></label><b id="szv">60</b>
+<label style="flex:1">Opacity<input id="op" type="range" min="1" max="100" value="60"></label><b id="opv">60%</b>
+</div>
+
+<div class="controls">
+<label style="flex:1">Rotation<input id="rot" type="range" min="-180" max="180" value="0"></label><b id="rotv">0°</b>
 <label><input id="repeat" type="checkbox"> Repeat Pattern</label>
 </div>
 
 <div class="controls">
-<select id="format"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WEBP</option></select>
-<label style="flex:1">Quality<input id="quality" type="range" min="10" max="100" value="92"></label><strong id="qualityValue">92%</strong>
+<label>Shadow <input id="shadow" type="checkbox" checked></label>
+<label>Output<select id="fmt"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp">WEBP</option></select></label>
+<label style="flex:1">Quality<input id="qual" type="range" min="10" max="100" value="92"></label><b id="qv">92%</b>
 </div>
 
 <div class="controls">
@@ -69,55 +69,132 @@
 <div class="hint" id="result">Upload an image to begin.</div>
 </div>
 
-<div class="hint"><b>How to Use:</b><br><br><b>1. Upload Image:</b> Select the image you want to watermark.<br><br><b>2. Choose Type:</b> Select Text Watermark to add text or Logo / Image to add your own logo.<br><br><b>3. Set Position:</b> Choose where the watermark should appear.<br><br><b>4. Adjust Size:</b> Increase or decrease watermark size using the Size slider.<br><br><b>5. Opacity:</b> Lower opacity for a subtle watermark.<br><br><b>6. Rotation:</b> Rotate the watermark from -180° to +180°.<br><br><b>7. Repeat Pattern:</b> Enable it to place the watermark repeatedly across the image.<br><br><b>8. Download:</b> Choose your output format and click <b>Add Watermark & Download</b>.</div>
+<div class="hint"><b>How to Use:</b><br><br>
+<b>1. Upload:</b> Select or drag an image into the upload area.<br><br>
+<b>2. Select Type:</b> Choose Text or Logo / Image watermark.<br><br>
+<b>3. Customize:</b> Change text, font, color, size and opacity.<br><br>
+<b>4. Position:</b> Select one of nine watermark positions.<br><br>
+<b>5. Rotation:</b> Rotate the watermark from -180° to +180°.<br><br>
+<b>6. Repeat Pattern:</b> Enable it to cover the image with repeated watermarks.<br><br>
+<b>7. Download:</b> Select PNG, JPG or WEBP and download the result.</div>
 </div>
 
 <div class="panel" style="margin-top:20px">
-<div class="title"><div class="ico">i</div><div><h2>About Image Watermark</h2><p>Protect and brand your images with text or logos.</p></div></div>
-<div class="hint"><p><b>Advanced Image Watermark</b> allows you to add branding, copyright notices, usernames or logos to your images.</p><p>You can control position, size, opacity and rotation to create a professional-looking watermark.</p><p>The original image remains unchanged.</p></div>
+<div class="title"><div class="ico">i</div><div><h2>About Image Watermark</h2><p>Protect, brand and personalize your images.</p></div></div>
+<div class="hint">This advanced watermark tool lets you add text or a logo to an image. You can control its position, size, opacity and rotation without changing the original file.</div>
 
 <div class="title" style="margin-top:20px"><div class="ico">✓</div><div><h2>Features</h2><p>Professional watermark controls.</p></div></div>
-<div class="hint">✓ Text watermark<br><br>✓ Logo watermark<br><br>✓ Custom text color<br><br>✓ Multiple font choices<br><br>✓ 9 position presets<br><br>✓ Size control<br><br>✓ Opacity control<br><br>✓ Rotation control<br><br>✓ Repeat watermark pattern<br><br>✓ JPG / PNG / WEBP export<br><br>✓ Quality control<br><br>✓ Drag & drop upload<br><br>✓ Browser-based processing</div>
+<div class="hint">✓ Text watermark<br><br>✓ Logo watermark<br><br>✓ Custom font<br><br>✓ Custom color<br><br>✓ Bold / Italic<br><br>✓ 9 positions<br><br>✓ Size control<br><br>✓ Opacity control<br><br>✓ Rotation<br><br>✓ Repeat pattern<br><br>✓ Text shadow<br><br>✓ PNG / JPG / WEBP<br><br>✓ Quality control<br><br>✓ Live preview<br><br>✓ Drag & drop</div>
 
-<div class="title" style="margin-top:20px"><div class="ico">★</div><div><h2>Helpful Tips</h2><p>Create a clean watermark.</p></div></div>
-<div class="hint"><p><b>Tip 1:</b> Use a transparent PNG logo for the cleanest logo watermark.</p><p><b>Tip 2:</b> Around 30–70% opacity often works well for subtle branding.</p><p><b>Tip 3:</b> Use Repeat Pattern when you want stronger protection against unauthorized reuse.</p><p><b>Tip 4:</b> Avoid making the watermark so large that it hides important image content.</p></div>
+<div class="title" style="margin-top:20px"><div class="ico">★</div><div><h2>Helpful Tips</h2><p>Create clean watermarks.</p></div></div>
+<div class="hint"><p><b>Tip 1:</b> Use a transparent PNG for logos.</p><p><b>Tip 2:</b> Keep opacity moderate for a subtle watermark.</p><p><b>Tip 3:</b> Use Repeat Pattern when stronger protection is needed.</p><p><b>Tip 4:</b> Use Shadow when the watermark is difficult to read against the image.</p></div>
 
 <div class="title" style="margin-top:20px"><div class="ico">?</div><div><h2>FAQ</h2><p>Common questions.</p></div></div>
-<div class="hint"><p><b>Can I add my own logo?</b><br>Yes. Select Logo / Image and upload your logo.</p><p><b>Can I change watermark transparency?</b><br>Yes. Use the Opacity slider.</p><p><b>Can I put a watermark in the center?</b><br>Yes. Select Center.</p><p><b>Can I repeat the watermark?</b><br>Yes. Enable Repeat Pattern.</p><p><b>Does this modify my original image?</b><br>No. A new watermarked image is created.</p><p><b>Are my images uploaded?</b><br>No server upload is required for processing.</p></div>
+<div class="hint"><p><b>Can I add my own logo?</b><br>Yes, choose Logo / Image and upload it.</p><p><b>Can I change transparency?</b><br>Yes, use the Opacity control.</p><p><b>Can I repeat the watermark?</b><br>Yes, enable Repeat Pattern.</p><p><b>Can I rotate it?</b><br>Yes, from -180° to +180°.</p><p><b>Does the original image change?</b><br>No.</p></div>
 
 <div class="title" style="margin-top:20px"><div class="ico">🔒</div><div><h2>Privacy</h2><p>Local browser processing.</p></div></div>
-<div class="hint">Watermark processing is performed locally in your browser. Your image and logo are not intentionally uploaded to a remote server.</div>
+<div class="hint">Image and logo processing happens locally in your browser. No server upload is required.</div>
 </div>
 </section></main>
 
 <footer>All Free Image Tools • Advanced Image Watermark</footer>
+
 <script src="../assets/theme.js"></script>
 <script>
-const $=id=>document.getElementById(id),file=$("file"),choose=$("choose"),zone=$("dropZone"),preview=$("preview"),canvas=$("canvas"),ctx=canvas.getContext("2d"),type=$("type"),position=$("position"),textBox=$("textBox"),logoBox=$("logoBox"),text=$("text"),color=$("color"),font=$("font"),logoChoose=$("logoChoose"),logoFile=$("logoFile"),sizeRange=$("size"),opacity=$("opacity"),rotation=$("rotation"),repeat=$("repeat"),format=$("format"),quality=$("quality"),download=$("download"),reset=$("reset"),result=$("result");let image=null,logo=null,selected=null,logoSelected=null;
+const $=id=>document.getElementById(id),file=$("file"),zone=$("zone"),preview=$("preview"),canvas=$("canvas"),ctx=canvas.getContext("2d"),kind=$("kind"),pos=$("pos"),txt=$("txt"),clr=$("clr"),font=$("font"),bold=$("bold"),italic=$("italic"),sz=$("sz"),op=$("op"),rot=$("rot"),repeat=$("repeat"),shadow=$("shadow"),fmt=$("fmt"),qual=$("qual"),download=$("download"),reset=$("reset"),result=$("result"),logoFile=$("logoFile");
+let img=null,logo=null,mainFile=null;
 
-choose.onclick=()=>file.click();
-file.onchange=e=>{if(e.target.files[0])loadImage(e.target.files[0])};
-logoChoose.onclick=()=>logoFile.click();
-logoFile.onchange=e=>{if(e.target.files[0])loadLogo(e.target.files[0])};
+file.onchange=e=>e.target.files[0]&&loadImage(e.target.files[0]);
+logoFile.onchange=e=>e.target.files[0]&&loadLogo(e.target.files[0]);
 
 ["dragenter","dragover"].forEach(x=>zone.addEventListener(x,e=>{e.preventDefault();zone.style.borderColor="var(--primary)"}));
 zone.addEventListener("dragleave",()=>zone.style.borderColor="");
 zone.addEventListener("drop",e=>{e.preventDefault();zone.style.borderColor="";let f=[...e.dataTransfer.files].find(x=>x.type.startsWith("image/"));if(f)loadImage(f)});
 
-function loadImage(f){selected=f;let u=URL.createObjectURL(f),i=new Image();i.onload=()=>{image=i;preview.style.display="block";zone.style.display="none";fit();result.innerHTML="<b>"+esc(f.name)+"</b><br>Original size: "+size(f.size)+"<br>Dimensions: "+i.naturalWidth+" × "+i.naturalHeight+" px";URL.revokeObjectURL(u)};i.onerror=()=>error("Unable to load image.");i.src=u}
-function loadLogo(f){logoSelected=f;let u=URL.createObjectURL(f),i=new Image();i.onload=()=>{logo=i;result.textContent="Logo selected: "+f.name;draw();URL.revokeObjectURL(u)};i.onerror=()=>error("Unable to load logo.");i.src=u}
-function fit(){let max=1000,s=Math.min(1,max/image.naturalWidth,max/image.naturalHeight);canvas.width=Math.round(image.naturalWidth*s);canvas.height=Math.round(image.naturalHeight*s);draw()}
-function getPos(w,h,wmw,wmh){let p=position.value,m=25,x=w/2-wmw/2,y=h/2-wmh/2;if(p==="tl"){x=m;y=m}if(p==="tc"){x=w/2-wmw/2;y=m}if(p==="tr"){x=w-m-wmw;y=m}if(p==="ml"){x=m;y=h/2-wmh/2}if(p==="mr"){x=w-m-wmw;y=h/2-wmh/2}if(p==="bl"){x=m;y=h-m-wmh}if(p==="bc"){x=w/2-wmw/2;y=h-m-wmh}if(p==="br"){x=w-m-wmw;y=h-m-wmh}return{x,y}}
-function draw(){if(!image)return;ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(image,0,0,canvas.width,canvas.height);ctx.save();ctx.globalAlpha=opacity.value/100;let ang=rotation.value*Math.PI/180,wmw,wmh;if(type.value==="text"){let fs=Math.max(10,+sizeRange.value),s=text.value||"Watermark";ctx.font="bold "+fs+"px "+font.value;let met=ctx.measureText(s);wmw=met.width;wmh=fs*1.2}else{if(!logo){ctx.restore();return}wmw=+sizeRange.value*2;wmh=logo.height*(wmw/logo.width)}let pos=getPos(canvas.width,canvas.height,wmw,wmh);if(repeat.checked){let stepX=wmw+100,stepY=wmh+100;for(let y=-wmh;y<canvas.height+wmh;y+=stepY)for(let x=-wmw;x<canvas.width+wmw;x+=stepX)water(x,y,wmw,wmh,ang)}else water(pos.x,pos.y,wmw,wmh,ang);ctx.restore()}
-function water(x,y,w,h,a){ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(a);if(type.value==="text"){ctx.fillStyle=color.value;ctx.textAlign="center";ctx.textBaseline="middle";ctx.font="bold "+Math.max(10,+sizeRange.value)+"px "+font.value;ctx.fillText(text.value||"Watermark",0,0)}else if(logo)ctx.drawImage(logo,-w/2,-h/2,w,h);ctx.restore()}
-[type,position,text,color,font,sizeRange,opacity,rotation,repeat,format,quality].forEach(e=>e.addEventListener("input",()=>{updateLabels();draw()}));type.onchange=()=>{textBox.style.display=type.value==="text"?"":"none";logoBox.style.display=type.value==="logo"?"":"none";draw()};
-function updateLabels(){$("sizeValue").textContent=sizeRange.value;$("opacityValue").textContent=opacity.value+"%";$("rotationValue").textContent=rotation.value+"°";$("qualityValue").textContent=quality.value+"%"}
-download.onclick=()=>{if(!image)return error("Please upload an image first.");if(type.value==="logo"&&!logo)return error("Please select a logo first.");download.disabled=true;download.textContent="Processing...";let ext=format.value==="image/webp"?"webp":format.value==="image/png"?"png":"jpg";canvas.toBlob(b=>{if(!b)return error("Export failed.");let u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=selected.name.replace(/\.[^/.]+$/,"")+"-watermarked."+ext;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);result.innerHTML="<b>✓ Watermark Added!</b><br>Output size: "+size(b.size)+"<br>Dimensions: "+canvas.width+" × "+canvas.height+"px";download.disabled=false;download.textContent="Add Watermark & Download"},format.value,format.value==="image/png"?undefined:+quality.value/100)};
-reset.onclick=()=>{file.value="";logoFile.value="";image=null;logo=null;selected=null;logoSelected=null;preview.style.display="none";zone.style.display="";text.value="© All Free Image Tools";type.value="text";position.value="center";sizeRange.value=60;opacity.value=65;rotation.value=0;repeat.checked=false;quality.value=92;textBox.style.display="";logoBox.style.display="none";updateLabels();result.textContent="Upload an image to begin.";download.disabled=false;download.textContent="Add Watermark & Download"};
-function error(m){result.innerHTML='<b style="color:var(--danger)">'+esc(m)+"</b>";download.disabled=false;download.textContent="Add Watermark & Download"}
-function size(n){if(!n)return"0 B";let u=["B","KB","MB","GB"],i=Math.min(Math.floor(Math.log(n)/Math.log(1024)),3);return(n/1024**i).toFixed(i?2:0)+" "+u[i]}
+function loadImage(f){mainFile=f;let u=URL.createObjectURL(f),i=new Image();i.onload=()=>{img=i;zone.style.display="none";preview.style.display="block";fit();result.innerHTML="<b>"+esc(f.name)+"</b><br>Original size: "+size(f.size)+"<br>Dimensions: "+i.naturalWidth+" × "+i.naturalHeight+" px";URL.revokeObjectURL(u)};i.src=u}
+function loadLogo(f){let u=URL.createObjectURL(f),i=new Image();i.onload=()=>{logo=i;draw();result.innerHTML="<b>Logo selected:</b> "+esc(f.name);URL.revokeObjectURL(u)};i.src=u}
+function fit(){let m=1100,s=Math.min(1,m/img.naturalWidth,m/img.naturalHeight);canvas.width=Math.round(img.naturalWidth*s);canvas.height=Math.round(img.naturalHeight*s);draw()}
+
+function getPosition(w,h,ww,hh){
+let m=Math.max(20,Math.min(w,h)*.04),p=pos.value,x=w/2-ww/2,y=h/2-hh/2;
+if(p==="tl"){x=m;y=m}if(p==="tc"){x=w/2-ww/2;y=m}if(p==="tr"){x=w-m-ww;y=m}
+if(p==="ml"){x=m;y=h/2-hh/2}if(p==="mr"){x=w-m-ww;y=h/2-hh/2}
+if(p==="bl"){x=m;y=h-m-hh}if(p==="bc"){x=w/2-ww/2;y=h-m-hh}if(p==="br"){x=w-m-ww;y=h-m-hh}
+return{x,y}
+}
+
+function draw(){
+if(!img)return;
+ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
+ctx.globalAlpha=op.value/100;
+let ww,hh;
+if(kind.value==="text"){
+let fs=Math.max(10,+sz.value),f=(italic.checked?"italic ":"")+(bold.checked?"bold ":"")+" "+fs+"px "+font.value;
+ctx.font=f;ww=Math.max(20,ctx.measureText(txt.value||"Watermark").width);hh=fs*1.25;
+}else{
+if(!logo){ctx.globalAlpha=1;return}
+ww=+sz.value*2;hh=logo.height*(ww/logo.width);
+}
+let p=getPosition(canvas.width,canvas.height,ww,hh);
+if(repeat.checked){
+let sx=ww+Math.max(40,canvas.width*.08),sy=hh+Math.max(40,canvas.height*.08);
+for(let y=-hh;y<canvas.height+hh;y+=sy)for(let x=-ww;x<canvas.width+ww;x+=sx)paint(x,y,ww,hh);
+}else paint(p.x,p.y,ww,hh);
+ctx.globalAlpha=1;
+labels();
+}
+
+function paint(x,y,w,h){
+ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(+rot.value*Math.PI/180);
+if(shadow.checked){ctx.shadowColor="rgba(0,0,0,.75)";ctx.shadowBlur=8;ctx.shadowOffsetX=3;ctx.shadowOffsetY=3}
+if(kind.value==="text"){let fs=Math.max(10,+sz.value);ctx.font=(italic.checked?"italic ":"")+(bold.checked?"bold ":"")+" "+fs+"px "+font.value;ctx.fillStyle=clr.value;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(txt.value||"Watermark",0,0)}
+else if(logo)ctx.drawImage(logo,-w/2,-h/2,w,h);
+ctx.restore()
+}
+
+function labels(){$("szv").textContent=sz.value;$("opv").textContent=op.value+"%";$("rotv").textContent=rot.value+"°";$("qv").textContent=qual.value+"%"}
+[kind,pos,txt,clr,font,bold,italic,sz,op,rot,repeat,shadow].forEach(e=>e.addEventListener("input",()=>draw()));
+kind.onchange=()=>{$("textControls").style.display=kind.value==="text"?"":"none";$("logoControls").style.display=kind.value==="logo"?"":"none";draw()};
+qual.oninput=labels;
+
+download.onclick=()=>{
+if(!img)return err("Please upload an image first.");
+if(kind.value==="logo"&&!logo)return err("Please select a logo first.");
+download.disabled=true;download.textContent="Processing...";
+let c=document.createElement("canvas");c.width=img.naturalWidth;c.height=img.naturalHeight;let z=c.getContext("2d");z.drawImage(img,0,0);
+let scale=img.naturalWidth/canvas.width;
+z.globalAlpha=op.value/100;
+let ww,hh;
+if(kind.value==="text"){let fs=+sz.value*scale;z.font=(italic.checked?"italic ":"")+(bold.checked?"bold ":"")+" "+fs+"px "+font.value;ww=Math.max(20,z.measureText(txt.value||"Watermark").width);hh=fs*1.25}
+else{ww=+sz.value*2*scale;hh=logo.height*(ww/logo.width)}
+let p=getPosition(c.width,c.height,ww,hh);
+if(repeat.checked){
+let sx=ww+Math.max(40,c.width*.08),sy=hh+Math.max(40,c.height*.08);
+for(let y=-hh;y<c.height+hh;y+=sy)for(let x=-ww;x<c.width+ww;x+=sx)paintExport(z,x,y,ww,hh,scale);
+}else paintExport(z,p.x,p.y,ww,hh,scale);
+z.globalAlpha=1;
+let ext=fmt.value==="image/png"?"png":fmt.value==="image/webp"?"webp":"jpg";
+c.toBlob(b=>{let u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=mainFile.name.replace(/\.[^/.]+$/,"")+"-watermarked."+ext;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);result.innerHTML="<b>✓ Watermark added successfully!</b><br>Output size: "+size(b.size)+"<br>Dimensions: "+c.width+" × "+c.height+" px";download.disabled=false;download.textContent="Add Watermark & Download"},fmt.value,fmt.value==="image/png"?undefined:+qual.value/100)
+};
+
+function paintExport(c,x,y,w,h,scale){
+c.save();c.translate(x+w/2,y+h/2);c.rotate(+rot.value*Math.PI/180);
+if(shadow.checked){c.shadowColor="rgba(0,0,0,.75)";c.shadowBlur=8*scale;c.shadowOffsetX=3*scale;c.shadowOffsetY=3*scale}
+if(kind.value==="text"){let fs=Math.max(10,+sz.value*scale);c.font=(italic.checked?"italic ":"")+(bold.checked?"bold ":"")+" "+fs+"px "+font.value;c.fillStyle=clr.value;c.textAlign="center";c.textBaseline="middle";c.fillText(txt.value||"Watermark",0,0)}
+else if(logo)c.drawImage(logo,-w/2,-h/2,w,h);
+c.restore()
+}
+
+reset.onclick=()=>{
+file.value="";logoFile.value="";img=null;logo=null;mainFile=null;preview.style.display="none";zone.style.display="";
+txt.value="© All Free Image Tools";kind.value="text";pos.value="center";sz.value=60;op.value=60;rot.value=0;repeat.checked=false;shadow.checked=true;qual.value=92;
+$("textControls").style.display="";$("logoControls").style.display="none";labels();result.textContent="Upload an image to begin.";download.disabled=false;download.textContent="Add Watermark & Download";
+};
+
+function size(n){if(!n)return"0 B";let u=["B","KB","MB","GB"],i=Math.min(3,Math.floor(Math.log(n)/Math.log(1024)));return(n/1024**i).toFixed(i?2:0)+" "+u[i]}
+function err(m){result.innerHTML='<b style="color:var(--danger)">'+esc(m)+"</b>";download.disabled=false;download.textContent="Add Watermark & Download"}
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-updateLabels();
+labels();
 </script>
 </body>
 </html>
