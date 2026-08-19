@@ -1,4 +1,4 @@
-# Pixora Rocket — Modular Website
+# All free Image tools — Modular Website
 - index.html = main file/dashboard
 - tools/ = one separate HTML file per tool
 - assets/style.css = shared premium UI
