@@ -1,52 +1,61 @@
-<!doctype html>
-<html>
-  <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>All Free Image Tools</title>
-<link rel="stylesheet" href="assets/style.css">
-</head>
-  <body>
-  <header class="top"><div class="logo"><b>🖼️</b> All Free Image Tools</div>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="#tools">All Tools</a>
-      <button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i>
-      </button></nav>
-  </header>
-   <main class="wrap"><section class="hero"><span class="pill">⚡ ALL-IN-ONE IMAGE TOOLKIT</span>
-     <h1>All free Image Tools</h1>
-     <p>A premium modular image toolkit. Every tool has its own page and can be maintained independently.</p>
-     <div class="search"><input id="search" placeholder="Search a tool..."></div>
-   </section>
-     <div class="heading" id="tools">
-       <h2>All Tools</h2><small id="count">20 tools</small></div>
-     <section class="grid">
-       
-<article class="card"><div class="ico">✂</div><h3>Background Remover</h3><p>Remove image backgrounds</p><a href="tools/background-remover.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">↔</div><h3>Image Resizer</h3><p>Resize to exact dimensions</p><a href="tools/image-resizer.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">▣</div><h3>Image Compressor</h3><p>Reduce image file size</p><a href="tools/image-compressor.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">⇄</div><h3>Format Converter</h3><p>Convert JPG, PNG and WEBP</p><a href="tools/format-converter.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">✦</div><h3>Image Enhancer</h3><p>Improve clarity and lighting</p><a href="tools/image-enhancer.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">↗</div><h3>AI Upscaler</h3><p>Increase image resolution</p><a href="tools/ai-upscaler.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">⌫</div><h3>Object Remover</h3><p>Remove unwanted objects</p><a href="tools/object-remover.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">◉</div><h3>Color Corrector</h3><p>Adjust brightness and contrast</p><a href="tools/color-corrector.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">▧</div><h3>Crop Image</h3><p>Crop an image</p><a href="tools/crop-image.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">⟳</div><h3>Rotate & Flip</h3><p>Rotate or mirror an image</p><a href="tools/rotate-flip.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">◌</div><h3>Blur Image</h3><p>Apply blur effects</p><a href="tools/blur-image.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">T</div><h3>Add Text</h3><p>Add text to an image</p><a href="tools/add-text.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">◆</div><h3>Add Watermark</h3><p>Add a watermark</p><a href="tools/add-watermark.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">◒</div><h3>Photo Filters</h3><p>Apply photo filters</p><a href="tools/photo-filters.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">▤</div><h3>Image to PDF</h3><p>Create PDF from images</p><a href="tools/image-to-pdf.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">▥</div><h3>PDF to Image</h3><p>Convert PDF pages to images</p><a href="tools/pdf-to-image.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">▣</div><h3>Passport Photo</h3><p>Create ID photo layout</p><a href="tools/passport-photo.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">☻</div><h3>Meme Maker</h3><p>Create memes with text</p><a href="tools/meme-maker.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">▦</div><h3>Collage Maker</h3><p>Combine images into a collage</p><a href="tools/collage-maker.html"><button class="use">Use Tool</button></a></article>
-<article class="card"><div class="ico">ⓘ</div><h3>Metadata Viewer</h3><p>View image information</p><a href="tools/metadata-viewer.html"><button class="use">Use Tool</button></a></article>
-     </section>
-   </main>
-    <footer>All Free Image Tools • Modular Image Tools</footer>
-    <script src="assets/theme.js"></script>
-    <script>const cards=[...document.querySelectorAll(".card")],s=document.getElementById("search"),c=document.getElementById("count");s.oninput=()=>{let q=s.value.toLowerCase(),n=0;cards.forEach(x=>{let ok=x.innerText.toLowerCase().includes(q);x.style.display=ok?"":"none";if(ok)n++});c.textContent=n+" tools"};</script>
-  </body>
-</html>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>All Free Image Tools</title><meta name="description" content="Free online image tools by TechG7. Resize, compress, convert, enhance and edit images easily.">
+<link rel="stylesheet" href="assets/style.css"><link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#0a0a08"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="Image Tools"><link rel="apple-touch-icon" href="./logo-192.png">
+<style>
+.brandLogo{width:40px;height:40px;object-fit:cover;border-radius:11px;box-shadow:0 4px 16px #0003}.loginBtn{border:1px solid var(--border);background:var(--card);color:var(--text);padding:9px 16px;border-radius:10px;font-size:12px;font-weight:800}.loginBtn:hover{border-color:var(--primary);color:var(--primary)}
+.footer{margin-top:60px;padding:48px max(20px,5vw) 24px;border-top:1px solid var(--border);background:var(--card)}.footerGrid{width:min(1200px,100%);margin:auto;display:grid;grid-template-columns:1.5fr 1fr 1.35fr 1fr;gap:35px}.footer h3{margin:0 0 14px;font-size:14px;color:var(--text)}.footer p,.footer a,.faq details{font-size:11px;line-height:1.7;color:var(--muted)}.footer a{display:block;margin:7px 0}.footer a:hover{color:var(--primary)}.footerBrand{display:flex;align-items:center;gap:10px;margin-bottom:13px;font-weight:850}.social{display:flex;gap:9px;margin-top:15px}.social a{display:grid;place-items:center;width:36px;height:36px;margin:0;border:1px solid var(--border);border-radius:10px;background:var(--card2);font-size:15px}.faq details{padding:10px 0;border-bottom:1px solid var(--border)}.faq summary{cursor:pointer;color:var(--text2);font-weight:750}.copyright{width:min(1200px,100%);margin:30px auto 0;padding-top:20px;border-top:1px solid var(--border);text-align:center;font-size:10px;color:var(--muted)}
+.modal{position:fixed;inset:0;z-index:2000;display:none;place-items:center;padding:20px;background:#0009;backdrop-filter:blur(8px)}.modal.show{display:grid}.loginBox{width:min(390px,100%);padding:28px;border:1px solid var(--border);border-radius:22px;background:var(--card);box-shadow:0 25px 80px #0008}.loginBox h2{margin:0 0 8px}.loginBox p{color:var(--muted);font-size:12px}.loginBox input{width:100%;height:44px;margin:7px 0;padding:0 12px;border:1px solid var(--border);border-radius:10px;background:var(--card2);color:var(--text);outline:0}.close{float:right;border:0;background:none;color:var(--muted);font-size:22px}.installBtn{display:none;border:1px solid var(--primary);background:transparent;color:var(--primary);padding:8px 12px;border-radius:9px;font-size:11px;font-weight:800}
+@media(max-width:900px){.footerGrid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.footerGrid{grid-template-columns:1fr}.footer{margin-top:40px;padding:35px 18px 20px}.brandLogo{width:35px;height:35px}.loginBtn{padding:8px 12px}.installBtn{display:none}}
+</style></head><body>
+
+<header class="top">
+<div class="logo"><img class="brandLogo" src="./logo-192.png" alt="TechG7 Logo"><span>All Free Image Tools</span></div>
+<nav class="nav"><a href="./index.html">Home</a><a href="#tools">All Tools</a><button class="installBtn" id="installBtn">Install</button><button class="loginBtn" onclick="openLogin()">Login</button><button class="toggle" id="themeToggle" onclick="toggleTheme()"><span>☾</span><span>☀</span><i></i></button></nav>
+</header>
+
+<main class="wrap">
+<section class="hero"><span class="pill">⚡ ALL-IN-ONE IMAGE TOOLKIT</span><h1>All Free Image Tools</h1><p>Fast, simple and powerful image tools for editing, converting, compressing and optimizing your images.</p><div class="search"><input id="search" placeholder="Search a tool..."></div></section>
+<div class="heading" id="tools"><h2>All Tools</h2><small id="count">20 tools</small></div>
+
+<section class="grid">
+<article class="card" onclick="go('tools/background-remover.html')"><div class="ico">✂</div><h3>Background Remover</h3><p>Remove image backgrounds easily</p></article>
+<article class="card" onclick="go('tools/image-resizer.html')"><div class="ico">↔</div><h3>Image Resizer</h3><p>Resize images to exact dimensions</p></article>
+<article class="card" onclick="go('tools/image-compressor.html')"><div class="ico">▣</div><h3>Image Compressor</h3><p>Reduce image file size</p></article>
+<article class="card" onclick="go('tools/format-converter.html')"><div class="ico">⇄</div><h3>Format Converter</h3><p>Convert JPG, PNG and WEBP</p></article>
+<article class="card" onclick="go('tools/image-enhancer.html')"><div class="ico">✦</div><h3>Image Enhancer</h3><p>Improve clarity and lighting</p></article>
+<article class="card" onclick="go('tools/ai-upscaler.html')"><div class="ico">↗</div><h3>AI Upscaler</h3><p>Increase image resolution</p></article>
+<article class="card" onclick="go('tools/object-remover.html')"><div class="ico">⌫</div><h3>Object Remover</h3><p>Remove unwanted objects</p></article>
+<article class="card" onclick="go('tools/color-corrector.html')"><div class="ico">◉</div><h3>Color Corrector</h3><p>Adjust brightness and contrast</p></article>
+<article class="card" onclick="go('tools/crop-image.html')"><div class="ico">▧</div><h3>Crop Image</h3><p>Crop an image precisely</p></article>
+<article class="card" onclick="go('tools/rotate-flip.html')"><div class="ico">⟳</div><h3>Rotate & Flip</h3><p>Rotate or mirror an image</p></article>
+<article class="card" onclick="go('tools/blur-image.html')"><div class="ico">◌</div><h3>Blur Image</h3><p>Apply blur effects</p></article>
+<article class="card" onclick="go('tools/add-text.html')"><div class="ico">T</div><h3>Add Text</h3><p>Add text anywhere on an image</p></article>
+<article class="card" onclick="go('tools/add-watermark.html')"><div class="ico">◆</div><h3>Add Watermark</h3><p>Add a custom watermark</p></article>
+<article class="card" onclick="go('tools/photo-filters.html')"><div class="ico">◒</div><h3>Photo Filters</h3><p>Apply creative photo filters</p></article>
+<article class="card" onclick="go('tools/image-to-pdf.html')"><div class="ico">▤</div><h3>Image to PDF</h3><p>Create PDF from images</p></article>
+<article class="card" onclick="go('tools/pdf-to-image.html')"><div class="ico">▥</div><h3>PDF to Image</h3><p>Convert PDF pages to images</p></article>
+<article class="card" onclick="go('tools/passport-photo.html')"><div class="ico">▣</div><h3>Passport Photo</h3><p>Create ID photo layouts</p></article>
+<article class="card" onclick="go('tools/meme-maker.html')"><div class="ico">☻</div><h3>Meme Maker</h3><p>Create memes with text</p></article>
+<article class="card" onclick="go('tools/collage-maker.html')"><div class="ico">▦</div><h3>Collage Maker</h3><p>Combine images into a collage</p></article>
+<article class="card" onclick="go('tools/metadata-viewer.html')"><div class="ico">ⓘ</div><h3>Metadata Viewer</h3><p>View image information</p></article>
+</section></main>
+
+<footer class="footer"><div class="footerGrid">
+<div><div class="footerBrand"><img class="brandLogo" src="./logo-192.png" alt="TechG7 Logo"><span>All Free Image Tools</span></div><p>Free online image tools for resizing, compressing, converting, enhancing and editing images directly in your browser.</p><div class="social"><a href="https://youtube.com/@gautam_techg7?si=6lmFr6Jv62a13pEj" target="_blank" rel="noopener" aria-label="YouTube">▶</a><a href="https://techg7.github.io/my-journey/" target="_blank" rel="noopener" aria-label="Website">🌐</a></div></div>
+<div><h3>Quick Links</h3><a href="./index.html">Home</a><a href="#tools">All Tools</a><a href="#faq">FAQ</a><a href="https://techg7.github.io/my-journey/" target="_blank" rel="noopener">My Website</a><a href="https://youtube.com/@gautam_techg7?si=6lmFr6Jv62a13pEj" target="_blank" rel="noopener">YouTube Channel</a></div>
+<div class="faq" id="faq"><h3>Frequently Asked Questions</h3><details><summary>Are these tools free?</summary><p>Yes. All available tools are designed to be free to use.</p></details><details><summary>Are my images uploaded?</summary><p>Browser-based tools process images locally whenever possible. Individual tools may have their own processing method.</p></details><details><summary>Does it work on mobile?</summary><p>Yes. The website is responsive and works on phones, tablets and computers.</p></details><details><summary>Which formats are supported?</summary><p>Support depends on the selected tool and commonly includes JPG, PNG and WEBP.</p></details></div>
+<div><h3>About</h3><p>All Free Image Tools is a modular collection of fast and simple image utilities.</p><p><b>Created by Gautam Kumar</b></p><a href="https://techg7.github.io/my-journey/" target="_blank" rel="noopener">TechG7 • My Journey →</a></div>
+</div><div class="copyright">© 2026 All Free Image Tools • Created by Gautam Kumar • All rights reserved.</div></footer>
+
+<div class="modal" id="loginModal" onclick="if(event.target===this)closeLogin()"><div class="loginBox"><button class="close" onclick="closeLogin()">×</button><h2>Login</h2><p>Login interface is ready. Authentication can be connected later.</p><input type="email" placeholder="Email"><input type="password" placeholder="Password"><button class="primary" style="width:100%;margin-top:8px" onclick="alert('Login backend is not connected yet.')">Continue</button></div></div>
+
+<script src="assets/theme.js"></script><script>
+function go(u){location.href=u}function openLogin(){loginModal.classList.add("show")}function closeLogin(){loginModal.classList.remove("show")}
+const cards=[...document.querySelectorAll(".card")],search=document.getElementById("search"),count=document.getElementById("count");
+search.oninput=()=>{let q=search.value.toLowerCase(),n=0;cards.forEach(x=>{let ok=x.innerText.toLowerCase().includes(q);x.style.display=ok?"":"none";if(ok)n++});count.textContent=n+" tools"};
+let deferredPrompt;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;installBtn.style.display="block"});
+installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.style.display="none"};
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));
+</script></body></html>
