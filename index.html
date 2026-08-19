@@ -118,7 +118,7 @@
 
 <script src="assets/theme.js"></script><script>
 function go(u){location.href=u}
- onst cards=[...document.querySelectorAll(".card")],search=document.getElementById("search"),count=document.getElementById("count");
+ const cards=[...document.querySelectorAll(".card")],search=document.getElementById("search"),count=document.getElementById("count");
 search.oninput=()=>{let q=search.value.toLowerCase(),n=0;cards.forEach(x=>{let ok=x.innerText.toLowerCase().includes(q);x.style.display=ok?"":"none";if(ok)n++});count.textContent=n+" tools"};
 let deferredPrompt;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;installBtn.style.display="block"});
 installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.style.display="none"};
