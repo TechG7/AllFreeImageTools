@@ -27,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
-window.AFITAuth = {
+export {
   auth,
   googleProvider,
   RecaptchaVerifier,
