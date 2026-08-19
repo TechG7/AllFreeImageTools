@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://techg7.github.io/AllFreeImageTools/</loc>
-<changefreq>weekly</changefreq>
-<priority>1.0</priority>
-</url>
-<url>
-<loc>https://techg7.github.io/AllFreeImageTools/tools/image-resizer.html</loc>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/background-remover.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/image-resizer.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/image-compressor.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/format-converter.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/image-enhancer.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/ai-upscaler.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/object-remover.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/color-corrector.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/crop-image.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/rotate-flip.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/blur-image.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/add-text.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/add-watermark.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/photo-filters.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/image-to-pdf.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/pdf-to-image.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/passport-photo.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/meme-maker.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/collage-maker.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://techg7.github.io/AllFreeImageTools/tools/metadata-viewer.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
