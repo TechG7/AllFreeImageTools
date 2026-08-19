@@ -55,8 +55,66 @@
 <div class="faq" id="faq"><h3>Frequently Asked Questions</h3><details><summary>Are these tools free?</summary><p>Yes. All available tools are designed to be free to use.</p></details><details><summary>Are my images uploaded?</summary><p>Browser-based tools process images locally whenever possible. Individual tools may have their own processing method.</p></details><details><summary>Does it work on mobile?</summary><p>Yes. The website is responsive and works on phones, tablets and computers.</p></details><details><summary>Which formats are supported?</summary><p>Support depends on the selected tool and commonly includes JPG, PNG and WEBP.</p></details></div>
 <div><h3>About</h3><p>All Free Image Tools is a modular collection of fast and simple image utilities.</p><p><b>Created by Gautam Kumar</b></p><a href="https://techg7.github.io/my-journey/" target="_blank" rel="noopener">TechG7 • My Journey →</a></div>
 </div><div class="copyright">© 2026 All Free Image Tools • Created by Gautam Kumar • All rights reserved.</div></footer>
+<div class="modal" id="loginModal">
+  <div class="loginBox">
+    <button class="close" onclick="closeLogin()">×</button>
 
-<div class="modal" id="loginModal" onclick="if(event.target===this)closeLogin()"><div class="loginBox"><button class="close" onclick="closeLogin()">×</button><h2>Login</h2><p>Login interface is ready. Authentication can be connected later.</p><input type="email" placeholder="Email"><input type="password" placeholder="Password"><button class="primary" style="width:100%;margin-top:8px" onclick="alert('Login backend is not connected yet.')">Continue</button></div></div>
+    <h2 id="authTitle">Welcome Back</h2>
+    <p id="authMessage">Login to your account</p>
+
+    <div id="emailAuth">
+      <input id="authName" type="text" placeholder="Full name" style="display:none">
+      <input id="authEmail" type="email" placeholder="Email address">
+      <input id="authPassword" type="password" placeholder="Password">
+
+      <button class="primary" id="emailLoginBtn" style="width:100%;margin-top:8px">
+        Login
+      </button>
+
+      <button class="primary" id="signupBtn" style="width:100%;margin-top:8px">
+        Create Account
+      </button>
+
+      <button class="textBtn" id="forgotBtn" type="button">
+        Forgot Password?
+      </button>
+    </div>
+
+    <div style="margin:15px 0;text-align:center;color:var(--muted)">
+      ─── OR ───
+    </div>
+
+    <button class="primary" id="googleBtn" style="width:100%">
+      🔵 Continue with Google
+    </button>
+
+    <div style="margin:15px 0;text-align:center;color:var(--muted)">
+      ─── OR ───
+    </div>
+
+    <div id="phoneAuth">
+      <input id="phoneNumber" type="tel" placeholder="+91XXXXXXXXXX">
+
+      <div id="recaptcha-container"></div>
+
+      <button class="primary" id="phoneBtn" style="width:100%;margin-top:8px">
+        Send OTP
+      </button>
+
+      <input id="otpCode" type="text"
+             placeholder="Enter OTP"
+             style="display:none">
+
+      <button class="primary" id="verifyOtpBtn"
+              style="width:100%;margin-top:8px;display:none">
+        Verify OTP
+      </button>
+    </div>
+
+    <p id="authStatus" style="margin-top:14px;text-align:center"></p>
+  </div>
+</div>
+
 
 <script src="assets/theme.js"></script><script>
 function go(u){location.href=u}function openLogin(){loginModal.classList.add("show")}function closeLogin(){loginModal.classList.remove("show")}
@@ -65,4 +123,6 @@ search.oninput=()=>{let q=search.value.toLowerCase(),n=0;cards.forEach(x=>{let o
 let deferredPrompt;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;installBtn.style.display="block"});
 installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.style.display="none"};
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));
-</script></body></html>
+</script>
+  <script type="module" src="./assets/firebase-auth.js"></script>
+</body></html>
