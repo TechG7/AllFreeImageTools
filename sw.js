@@ -1,4 +1,4 @@
-const CACHE_NAME="all-free-image-tools-v1";
+const CACHE_NAME="all-free-image-tools-v2";
 const ASSETS=[
   "./",
   "./index.html",
