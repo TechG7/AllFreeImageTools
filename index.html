@@ -157,226 +157,158 @@ installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();a
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error));
 </script>
   <script type="module" src="./assets/firebase-auth.js"></script>
-  <script type="module">
+<script type="module">
 import {
   auth,
   googleProvider,
-  RecaptchaVerifier,
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
   onAuthStateChanged,
-  updateProfile,
-  signInWithPhoneNumber
+  updateProfile
 } from "./assets/firebase-auth.js";
 
-const modal = document.getElementById("loginModal");
-const title = document.getElementById("authTitle");
-const message = document.getElementById("authMessage");
-const nameInput = document.getElementById("authName");
-const emailInput = document.getElementById("authEmail");
-const passwordInput = document.getElementById("authPassword");
-const loginBtn = document.getElementById("emailLoginBtn");
-const signupBtn = document.getElementById("signupBtn");
-const forgotBtn = document.getElementById("forgotBtn");
-const googleBtn = document.getElementById("googleBtn");
-const phoneBtn = document.getElementById("phoneBtn");
-const verifyBtn = document.getElementById("verifyOtpBtn");
-const phoneInput = document.getElementById("phoneNumber");
-const otpInput = document.getElementById("otpCode");
-const status = document.getElementById("authStatus");
+const modal=document.getElementById("loginModal");
+const title=document.getElementById("authTitle");
+const message=document.getElementById("authMessage");
+const nameInput=document.getElementById("authName");
+const emailInput=document.getElementById("authEmail");
+const passwordInput=document.getElementById("authPassword");
+const loginBtn=document.getElementById("emailLoginBtn");
+const signupBtn=document.getElementById("signupBtn");
+const forgotBtn=document.getElementById("forgotBtn");
+const googleBtn=document.getElementById("googleBtn");
+const status=document.getElementById("authStatus");
 
-let confirmationResult = null;
-let recaptchaVerifier = null;
+let signupMode=false;
 
-window.openLogin = () => modal.classList.add("show");
-window.closeLogin = () => modal.classList.remove("show");
+window.openLogin=()=>modal.classList.add("show");
+window.closeLogin=()=>modal.classList.remove("show");
 
-function showStatus(text, ok=false) {
-  status.textContent = text;
-  status.style.color = ok ? "var(--primary)" : "#ff7777";
+function showStatus(text,ok=false){
+  status.textContent=text;
+  status.style.color=ok?"var(--primary)":"#ff6666";
 }
 
-function errorText(error) {
-  const map = {
+function errorText(e){
+  const x={
     "auth/invalid-email":"Invalid email address.",
     "auth/user-not-found":"No account found with this email.",
     "auth/wrong-password":"Incorrect password.",
-    "auth/email-already-in-use":"This email is already registered.",
-    "auth/weak-password":"Password should be at least 6 characters.",
     "auth/invalid-credential":"Email or password is incorrect.",
-    "auth/too-many-requests":"Too many attempts. Please try again later."
+    "auth/email-already-in-use":"This email is already registered.",
+    "auth/weak-password":"Password must be at least 6 characters.",
+    "auth/too-many-requests":"Too many attempts. Try again later."
   };
-  return map[error.code] || error.message;
+  return x[e.code]||"Something went wrong. Please try again.";
 }
 
-loginBtn.onclick = async () => {
-  try {
-    const result = await signInWithEmailAndPassword(
-      auth,
-      emailInput.value.trim(),
-      passwordInput.value
-    );
-    showStatus("Login successful ✓", true);
-    setTimeout(closeLogin, 700);
-  } catch (e) {
-    showStatus(errorText(e));
-  }
-};
-
-signupBtn.onclick = async () => {
-  if (nameInput.style.display === "none") {
-    nameInput.style.display = "block";
-    title.textContent = "Create Account";
-    message.textContent = "Enter your details";
-    signupBtn.textContent = "Create Account";
-    loginBtn.textContent = "Back to Login";
-    loginBtn.onclick = () => {
-      nameInput.style.display = "none";
-      title.textContent = "Welcome Back";
-      message.textContent = "Login to your account";
-      loginBtn.textContent = "Login";
-      signupBtn.textContent = "Create Account";
-    };
+loginBtn.onclick=async()=>{
+  if(signupMode){
+    signupMode=false;
+    nameInput.style.display="none";
+    title.textContent="Welcome Back";
+    message.textContent="Login to your account";
+    loginBtn.textContent="Login";
     return;
   }
 
-  try {
-    const result = await createUserWithEmailAndPassword(
+  try{
+    await signInWithEmailAndPassword(
+      auth,
+      emailInput.value.trim(),
+      passwordInput.value
+    );
+    showStatus("Login successful ✓",true);
+    setTimeout(closeLogin,700);
+  }catch(e){
+    showStatus(errorText(e));
+  }
+};
+
+signupBtn.onclick=async()=>{
+  if(!signupMode){
+    signupMode=true;
+    nameInput.style.display="block";
+    title.textContent="Create Account";
+    message.textContent="Create your free account";
+    loginBtn.textContent="Back to Login";
+    return;
+  }
+
+  try{
+    const r=await createUserWithEmailAndPassword(
       auth,
       emailInput.value.trim(),
       passwordInput.value
     );
 
-    if (nameInput.value.trim()) {
-      await updateProfile(result.user, {
-        displayName: nameInput.value.trim()
+    if(nameInput.value.trim()){
+      await updateProfile(r.user,{
+        displayName:nameInput.value.trim()
       });
     }
 
-    showStatus("Account created successfully ✓", true);
-    setTimeout(closeLogin, 900);
-  } catch (e) {
+    showStatus("Account created successfully ✓",true);
+    setTimeout(closeLogin,900);
+  }catch(e){
     showStatus(errorText(e));
   }
 };
 
-forgotBtn.onclick = async () => {
-  const email = emailInput.value.trim();
+forgotBtn.onclick=async()=>{
+  const email=emailInput.value.trim();
 
-  if (!email) {
+  if(!email){
     showStatus("Enter your email first.");
     return;
   }
 
-  try {
-    await sendPasswordResetEmail(auth, email);
-    showStatus("Password reset email sent ✓", true);
-  } catch (e) {
+  try{
+    await sendPasswordResetEmail(auth,email);
+    showStatus("Password reset email sent ✓",true);
+  }catch(e){
     showStatus(errorText(e));
   }
 };
 
-googleBtn.onclick = async () => {
-  try {
-    await signInWithPopup(auth, googleProvider);
-    showStatus("Google login successful ✓", true);
-    setTimeout(closeLogin, 700);
-  } catch (e) {
+googleBtn.onclick=async()=>{
+  try{
+    await signInWithPopup(auth,googleProvider);
+    showStatus("Google login successful ✓",true);
+    setTimeout(closeLogin,700);
+  }catch(e){
     showStatus(errorText(e));
   }
 };
 
-function setupRecaptcha() {
-  if (recaptchaVerifier) return;
+onAuthStateChanged(auth,user=>{
+  const button=document.querySelector(".loginBtn");
+  if(!button)return;
 
-  recaptchaVerifier = new RecaptchaVerifier(
-    auth,
-    "recaptcha-container",
-    {
-      size: "normal"
-    }
-  );
+  if(user){
+    button.textContent=user.displayName
+      ?`👤 ${user.displayName}`
+      :"👤 Account";
 
-  recaptchaVerifier.render();
-}
-
-phoneBtn.onclick = async () => {
-  const phone = phoneInput.value.trim();
-
-  if (!phone.startsWith("+")) {
-    showStatus("Use international format, e.g. +919876543210");
-    return;
-  }
-
-  try {
-    setupRecaptcha();
-
-    confirmationResult = await signInWithPhoneNumber(
-      auth,
-      phone,
-      recaptchaVerifier
-    );
-
-    otpInput.style.display = "block";
-    verifyBtn.style.display = "block";
-
-    showStatus("OTP sent successfully ✓", true);
-  } catch (e) {
-    showStatus(errorText(e));
-
-    if (recaptchaVerifier) {
-      recaptchaVerifier.clear();
-      recaptchaVerifier = null;
-    }
-  }
-};
-
-verifyBtn.onclick = async () => {
-  if (!confirmationResult) {
-    showStatus("Send OTP first.");
-    return;
-  }
-
-  try {
-    await confirmationResult.confirm(otpInput.value.trim());
-
-    showStatus("Mobile login successful ✓", true);
-    setTimeout(closeLogin, 700);
-  } catch (e) {
-    showStatus("Invalid OTP.");
-  }
-};
-
-onAuthStateChanged(auth, user => {
-  const loginButton = document.querySelector(".loginBtn");
-
-  if (!loginButton) return;
-
-  if (user) {
-    loginButton.textContent = user.displayName
-      ? `👤 ${user.displayName}`
-      : "👤 Account";
-
-    loginButton.onclick = async () => {
-      const logout = confirm(
-        `Logged in as ${user.email || user.phoneNumber}\n\nPress OK to logout.`
-      );
-
-      if (logout) {
+    button.onclick=async()=>{
+      if(confirm(
+        `Logged in as ${user.email||"User"}\n\nPress OK to logout.`
+      )){
         await signOut(auth);
       }
     };
-  } else {
-    loginButton.textContent = "Login";
-    loginButton.onclick = window.openLogin;
+  }else{
+    button.textContent="Login";
+    button.onclick=window.openLogin;
   }
 });
 
-modal.addEventListener("click", e => {
-  if (e.target === modal) closeLogin();
+modal.addEventListener("click",e=>{
+  if(e.target===modal)closeLogin();
 });
-                                        </script>
-</body></html>
+    </script>
+  
+  </body></html>
