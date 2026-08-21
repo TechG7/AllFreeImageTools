@@ -57,27 +57,321 @@
 <footer>All Free Image Tools • Advanced Image Converter</footer>
 <script src="../assets/theme.js"></script>
 <script>
-const $=id=>document.getElementById(id),file=$("file"),choose=$("choose"),zone=$("dropZone"),preview=$("preview"),format=$("format"),quality=$("quality"),qv=$("qv"),count=$("count"),list=$("list"),convert=$("convert"),reset=$("reset"),result=$("result");let files=[];
+const $=id=>document.getElementById(id);
+
+const file=$("file");
+const choose=$("choose");
+const zone=$("dropZone");
+const preview=$("preview");
+const format=$("format");
+const quality=$("quality");
+const qv=$("qv");
+const count=$("count");
+const list=$("list");
+const convert=$("convert");
+const reset=$("reset");
+const result=$("result");
+
+let files=[];
+
 choose.onclick=()=>file.click();
-file.onchange=e=>setFiles([...e.target.files]);
-quality.oninput=()=>qv.textContent=quality.value+"%";
-["dragenter","dragover"].forEach(x=>zone.addEventListener(x,e=>{e.preventDefault();zone.style.borderColor="var(--primary)"}));
-zone.addEventListener("dragleave",()=>zone.style.borderColor="");
-zone.addEventListener("drop",e=>{e.preventDefault();zone.style.borderColor="";setFiles([...e.dataTransfer.files].filter(f=>f.type.startsWith("image/")))});
-function setFiles(a){files=a;if(!files.length)return;preview.style.display="block";count.innerHTML="<b>"+files.length+"</b> image"+(files.length>1?"s":"")+" selected.";list.innerHTML=files.map((f,i)=>`<div class="hint" style="margin-top:10px"><b>${i+1}. ${esc(f.name)}</b><br>Original Size: ${size(f.size)}<br>Format: ${esc(f.type)}</div>`).join("");result.textContent="Ready to convert."}
-convert.onclick=async()=>{
-if(!files.length)return error("Please select at least one image.");
-convert.disabled=true;convert.textContent="Converting...";
-let done=0,totalSaved=0;
-for(const f of files){try{let b=await convertFile(f,format.value,+quality.value/100);let ext=format.value==="image/jpeg"?"jpg":format.value==="image/webp"?"webp":"png",name=f.name.replace(/\.[^/.]+$/,"")+"."+ext,u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);totalSaved+=f.size-b.size;done++}catch(e){console.error(e)}}
-result.innerHTML="<b>✓ Conversion Complete!</b><br><br>Converted: <b>"+done+"/"+files.length+"</b> images<br>Total size change: <b>"+(totalSaved>=0?"Saved ":"Increased ")+size(Math.abs(totalSaved))+"</b>";
-convert.disabled=false;convert.textContent="Convert & Download";
+
+file.onchange=e=>{
+  setFiles([...e.target.files]);
 };
-function convertFile(f,type,q){return new Promise((resolve,reject)=>{let u=URL.createObjectURL(f),i=new Image();i.onload=()=>{let c=document.createElement("canvas"),x=c.getContext("2d");c.width=i.naturalWidth;c.height=i.naturalHeight;if(type==="image/jpeg"){x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height)}x.drawImage(i,0,0);c.toBlob(b=>{URL.revokeObjectURL(u);b?resolve(b):reject("Conversion failed")},type,type==="image/png"?undefined:q)};i.onerror=()=>{URL.revokeObjectURL(u);reject("Invalid image")};i.src=u})}
-reset.onclick=()=>{files=[];file.value="";list.innerHTML="";count.textContent="No images selected.";result.textContent="Select one or more images to begin.";preview.style.display="none";quality.value=90;qv.textContent="90%";format.value="image/jpeg";convert.disabled=false;convert.textContent="Convert & Download"};
-function size(n){if(!n)return"0 B";let u=["B","KB","MB","GB"],i=Math.min(Math.floor(Math.log(n)/Math.log(1024)),3);return(n/1024**i).toFixed(i?2:0)+" "+u[i]}
-function error(m){result.innerHTML='<b style="color:var(--danger)">'+esc(m)+"</b>";convert.disabled=false;convert.textContent="Convert & Download"}
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-</script>
+
+quality.oninput=()=>{
+  qv.textContent=quality.value+"%";
+};
+
+["dragenter","dragover"].forEach(x=>{
+  zone.addEventListener(x,e=>{
+    e.preventDefault();
+    zone.style.borderColor="var(--primary)";
+  });
+});
+
+zone.addEventListener("dragleave",()=>{
+  zone.style.borderColor="";
+});
+
+zone.addEventListener("drop",e=>{
+  e.preventDefault();
+  zone.style.borderColor="";
+
+  setFiles(
+    [...e.dataTransfer.files]
+    .filter(f=>f.type.startsWith("image/"))
+  );
+});
+
+function setFiles(selected){
+
+  files=selected;
+
+  if(!files.length){
+    preview.style.display="none";
+    return;
+  }
+
+  preview.style.display="block";
+
+  count.innerHTML=
+    "<b>"+files.length+"</b> image"+
+    (files.length>1?"s":"")+
+    " selected.";
+
+  list.innerHTML="";
+
+  files.forEach((f,i)=>{
+
+    const item=document.createElement("div");
+
+    item.className="hint";
+
+    item.style.cssText=
+      "margin-top:12px;padding:12px;"+
+      "border:1px solid var(--border);"+
+      "border-radius:14px;";
+
+    const row=document.createElement("div");
+
+    row.style.cssText=
+      "display:flex;align-items:center;"+
+      "gap:12px;";
+
+    const img=document.createElement("img");
+
+    img.alt=f.name;
+
+    img.style.cssText=
+      "width:90px;height:90px;"+
+      "object-fit:contain;"+
+      "border-radius:10px;"+
+      "background:var(--bg);"+
+      "border:1px solid var(--border);"+
+      "flex-shrink:0;";
+
+    const info=document.createElement("div");
+
+    info.style.cssText=
+      "min-width:0;word-break:break-word;";
+
+    info.innerHTML=
+      "<b>"+(i+1)+". "+esc(f.name)+"</b>"+
+      "<br>Original Size: "+size(f.size)+
+      "<br>Format: "+esc(f.type);
+
+    row.appendChild(img);
+    row.appendChild(info);
+    item.appendChild(row);
+
+    list.appendChild(item);
+
+    const url=URL.createObjectURL(f);
+
+    img.src=url;
+
+    img.onload=()=>{
+      URL.revokeObjectURL(url);
+    };
+
+  });
+
+  result.textContent="Ready to convert.";
+}
+
+convert.onclick=async()=>{
+
+  if(!files.length){
+    return error("Please select at least one image.");
+  }
+
+  convert.disabled=true;
+  convert.textContent="Converting...";
+
+  let done=0;
+  let totalSaved=0;
+
+  for(const f of files){
+
+    try{
+
+      const b=await convertFile(
+        f,
+        format.value,
+        +quality.value/100
+      );
+
+      const ext=
+        format.value==="image/jpeg"
+        ?"jpg"
+        :format.value==="image/webp"
+        ?"webp"
+        :"png";
+
+      const name=
+        f.name.replace(/\.[^/.]+$/,"")+
+        "."+
+        ext;
+
+      const u=URL.createObjectURL(b);
+
+      const a=document.createElement("a");
+
+      a.href=u;
+      a.download=name;
+
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(()=>{
+        URL.revokeObjectURL(u);
+      },1000);
+
+      totalSaved+=f.size-b.size;
+
+      done++;
+
+    }catch(e){
+
+      console.error(e);
+
+    }
+  }
+
+  result.innerHTML=
+    "<b>✓ Conversion Complete!</b>"+
+    "<br><br>Converted: <b>"+
+    done+
+    "/"+
+    files.length+
+    "</b> images"+
+    "<br>Total size change: <b>"+
+    (totalSaved>=0?"Saved ":"Increased ")+
+    size(Math.abs(totalSaved))+
+    "</b>";
+
+  convert.disabled=false;
+  convert.textContent="Convert & Download";
+};
+
+function convertFile(f,type,q){
+
+  return new Promise((resolve,reject)=>{
+
+    const u=URL.createObjectURL(f);
+    const i=new Image();
+
+    i.onload=()=>{
+
+      const c=document.createElement("canvas");
+      const x=c.getContext("2d");
+
+      c.width=i.naturalWidth;
+      c.height=i.naturalHeight;
+
+      if(type==="image/jpeg"){
+
+        x.fillStyle="#fff";
+        x.fillRect(
+          0,
+          0,
+          c.width,
+          c.height
+        );
+      }
+
+      x.drawImage(i,0,0);
+
+      c.toBlob(
+        b=>{
+          URL.revokeObjectURL(u);
+
+          b
+          ?resolve(b)
+          :reject("Conversion failed");
+        },
+        type,
+        type==="image/png"
+        ?undefined
+        :q
+      );
+    };
+
+    i.onerror=()=>{
+
+      URL.revokeObjectURL(u);
+      reject("Invalid image");
+
+    };
+
+    i.src=u;
+  });
+}
+
+reset.onclick=()=>{
+
+  files=[];
+  file.value="";
+  list.innerHTML="";
+  count.textContent="No images selected.";
+  result.textContent="Select one or more images to begin.";
+
+  preview.style.display="none";
+
+  quality.value=90;
+  qv.textContent="90%";
+
+  format.value="image/jpeg";
+
+  convert.disabled=false;
+  convert.textContent="Convert & Download";
+};
+
+function size(n){
+
+  if(!n)return"0 B";
+
+  const u=["B","KB","MB","GB"];
+
+  const i=Math.min(
+    Math.floor(Math.log(n)/Math.log(1024)),
+    3
+  );
+
+  return(
+    n/1024**i
+  ).toFixed(i?2:0)+
+  " "+
+  u[i];
+}
+
+function error(m){
+
+  result.innerHTML=
+    '<b style="color:var(--danger)">'+
+    esc(m)+
+    "</b>";
+
+  convert.disabled=false;
+  convert.textContent="Convert & Download";
+}
+
+function esc(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+    m=>({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[m])
+  );
+}
+    </script>
 </body>
 </html>
