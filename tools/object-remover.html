@@ -15,18 +15,913 @@
 <div class="title" style="margin-top:20px"><div class="ico">?</div><div><h2>FAQ</h2><p>Common questions.</p></div></div><div class="hint"><p><b>Can I remove a person or object?</b><br>You can mark unwanted areas and attempt to replace them using the available fill methods.</p><p><b>Is this cloud AI?</b><br>No. This standalone version performs the processing directly in the browser.</p><p><b>Will every object disappear perfectly?</b><br>No. Complex backgrounds may require multiple passes or a more advanced AI inpainting model.</p><p><b>Does the original image change?</b><br>No. The original file remains unchanged.</p></div>
 <div class="title" style="margin-top:20px"><div class="ico">🔒</div><div><h2>Privacy</h2><p>Local browser processing.</p></div></div><div class="hint">Your image is processed locally in your browser.</div></div>
 </section></main><footer>All Free Image Tools • Advanced Object Remover</footer>
-<script src="../assets/theme.js"></script><script>
-const $=id=>document.getElementById(id),file=$("file"),zone=$("zone"),preview=$("preview"),canvas=$("canvas"),ctx=canvas.getContext("2d"),brush=$("brush"),strength=$("strength"),undo=$("undo"),clear=$("clear"),remove=$("remove"),download=$("download"),reset=$("reset"),result=$("result");let img=null,base=null,work=null,mask=null,history=[],drawing=false,last=null,scale=1;
-file.onchange=e=>e.target.files[0]&&load(e.target.files[0]);["dragenter","dragover"].forEach(v=>zone.addEventListener(v,e=>e.preventDefault()));zone.addEventListener("drop",e=>{e.preventDefault();let f=[...e.dataTransfer.files].find(x=>x.type.startsWith("image/"));if(f)load(f)});
-function load(f){let u=URL.createObjectURL(f),i=new Image();i.onload=()=>{img=i;zone.style.display="none";preview.style.display="block";scale=Math.min(1,1100/i.naturalWidth,750/i.naturalHeight);canvas.width=Math.round(i.naturalWidth*scale);canvas.height=Math.round(i.naturalHeight*scale);base=document.createElement("canvas");base.width=i.naturalWidth;base.height=i.naturalHeight;base.getContext("2d").drawImage(i,0,0);work=base;mask=document.createElement("canvas");mask.width=i.naturalWidth;mask.height=i.naturalHeight;history=[];draw();result.innerHTML="<b>"+esc(f.name)+"</b><br>Original size: "+fmt(f.size)+"<br>Dimensions: "+i.naturalWidth+" × "+i.naturalHeight+" px";URL.revokeObjectURL(u)};i.src=u}
-function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(work,0,0,canvas.width,canvas.height);if(mask){ctx.save();ctx.globalAlpha=.38;ctx.fillStyle="#ff1744";ctx.drawImage(mask,0,0,canvas.width,canvas.height);ctx.restore()}}
-function point(e){let r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}}
-function paint(e){let p=point(e),m=mask.getContext("2d"),r=+brush.value/scale;m.fillStyle="#fff";m.beginPath();m.arc(p.x/scale,p.y/scale,r,0,Math.PI*2);m.fill();draw();last=p}
-canvas.onpointerdown=e=>{drawing=true;canvas.setPointerCapture(e.pointerId);history.push(mask.getContext("2d").getImageData(0,0,mask.width,mask.height));paint(e)};canvas.onpointermove=e=>{if(drawing)paint(e)};canvas.onpointerup=()=>drawing=false;canvas.onpointercancel=()=>drawing=false;
-brush.oninput=()=>$("bv").textContent=brush.value+" px";strength.oninput=()=>$("sv").textContent=strength.value+"%";
-undo.onclick=()=>{if(!history.length)return;mask.getContext("2d").putImageData(history.pop(),0,0);draw()};clear.onclick=()=>{mask.getContext("2d").clearRect(0,0,mask.width,mask.height);history=[];draw()};
-remove.onclick=()=>{if(!work)return err("Please upload an image first.");let md=$("method").value,st=+$("strength").value/100,mc=mask.getContext("2d"),m=mc.getImageData(0,0,mask.width,mask.height).data;if(!m.some((v,i)=>i%4===3&&v>0))return err("Paint over the object you want to remove.");remove.disabled=true;remove.textContent="Processing...";setTimeout(()=>{let w=work.getContext("2d"),d=w.getImageData(0,0,work.width,work.height),a=d.data,out=new Uint8ClampedArray(a),rad=md==="blur"?18:md==="smooth"?8:4;for(let y=rad;y<work.height-rad;y++)for(let x=rad;x<work.width-rad;x++){let mi=(y*work.width+x)*4;if(m[mi+3]<20)continue;let rr=0,gg=0,bb=0,n=0;for(let dy=-rad;dy<=rad;dy+=Math.max(1,Math.floor(rad/3)))for(let dx=-rad;dx<=rad;dx+=Math.max(1,Math.floor(rad/3))){if(Math.abs(dx)<rad*.55&&Math.abs(dy)<rad*.55)continue;let q=((y+dy)*work.width+x+dx)*4;if(m[q+3]<20){rr+=a[q];gg+=a[q+1];bb+=a[q+2];n++}}if(n){let q=mi;out[q]=a[q]*(1-st)+rr/n*st;out[q+1]=a[q+1]*(1-st)+gg/n*st;out[q+2]=a[q+2]*(1-st)+bb/n*st}}d.data.set(out);work.getContext("2d").putImageData(d,0,0);mc.clearRect(0,0,mask.width,mask.height);history=[];draw();result.innerHTML="<b>✓ Object removal applied.</b><br>Review the result and use Download Result.";remove.disabled=false;remove.textContent="Remove Object"},50)};
-download.onclick=()=>{if(!work)return err("Please upload an image first.");let type="image/png";work.toBlob(b=>{let u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="object-removed-"+Date.now()+".png";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);result.innerHTML="<b>✓ Download ready!</b><br>Output size: "+fmt(b.size)},type)};
-reset.onclick=()=>{file.value="";img=null;base=null;work=null;mask=null;history=[];preview.style.display="none";zone.style.display="";result.textContent="Upload an image, then paint over the unwanted object.";remove.disabled=false;remove.textContent="Remove Object"};
-function fmt(n){let u=["B","KB","MB","GB"],i=Math.min(3,Math.floor(Math.log(n||1)/Math.log(1024)));return(n/1024**i).toFixed(i?2:0)+" "+u[i]}function err(m){result.innerHTML="<b style='color:var(--danger)'>"+esc(m)+"</b>";remove.disabled=false;remove.textContent="Remove Object"}function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-</script></body></html>
+<script src="../assets/theme.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+
+const file=$("file");
+const zone=$("zone");
+const preview=$("preview");
+const canvas=$("canvas");
+const ctx=canvas.getContext("2d");
+
+const brush=$("brush");
+const strength=$("strength");
+const method=$("method");
+
+const undo=$("undo");
+const clear=$("clear");
+const remove=$("remove");
+const download=$("download");
+const reset=$("reset");
+
+const result=$("result");
+
+let sourceCanvas=null;
+let workCanvas=null;
+let maskCanvas=null;
+let img=null;
+
+let history=[];
+let drawing=false;
+let lastPoint=null;
+let processing=false;
+
+let originalName="object-removed";
+
+const cvReady=new Promise((resolve,reject)=>{
+
+  if(window.cv){
+    if(cv.getBuildInformation){
+      resolve();
+      return;
+    }
+
+    cv["onRuntimeInitialized"]=resolve;
+    return;
+  }
+
+  const s=document.createElement("script");
+
+  s.src=
+    "https://docs.opencv.org/4.x/opencv.js";
+
+  s.async=true;
+
+  s.onload=()=>{
+    if(window.cv){
+
+      if(cv.getBuildInformation){
+        resolve();
+      }else{
+        cv["onRuntimeInitialized"]=resolve;
+      }
+
+    }else{
+      reject();
+    }
+  };
+
+  s.onerror=reject;
+
+  document.head.appendChild(s);
+
+});
+
+
+file.onchange=e=>{
+
+  const f=e.target.files[0];
+
+  if(f) loadImage(f);
+
+};
+
+
+["dragenter","dragover"].forEach(type=>{
+
+  zone.addEventListener(type,e=>{
+    e.preventDefault();
+    zone.style.borderColor="var(--primary)";
+  });
+
+});
+
+
+zone.addEventListener("dragleave",()=>{
+
+  zone.style.borderColor="";
+
+});
+
+
+zone.addEventListener("drop",e=>{
+
+  e.preventDefault();
+
+  zone.style.borderColor="";
+
+  const f=
+    [...e.dataTransfer.files]
+    .find(x=>x.type.startsWith("image/"));
+
+  if(f) loadImage(f);
+
+});
+
+
+function loadImage(file){
+
+  originalName=
+    file.name
+    .replace(/\.[^/.]+$/,"")
+    .replace(/[^\w-]+/g,"-")
+    .replace(/-+/g,"-");
+
+  const url=
+    URL.createObjectURL(file);
+
+  const i=new Image();
+
+  i.onload=()=>{
+
+    img=i;
+
+    zone.style.display="none";
+    preview.style.display="block";
+
+    /*
+      Display canvas is limited in size,
+      but processing canvases keep the
+      original image resolution.
+    */
+
+    const maxW=1200;
+    const maxH=800;
+
+    const scale=
+      Math.min(
+        1,
+        maxW/i.naturalWidth,
+        maxH/i.naturalHeight
+      );
+
+    canvas.width=
+      Math.round(i.naturalWidth*scale);
+
+    canvas.height=
+      Math.round(i.naturalHeight*scale);
+
+    sourceCanvas=
+      document.createElement("canvas");
+
+    sourceCanvas.width=i.naturalWidth;
+    sourceCanvas.height=i.naturalHeight;
+
+    sourceCanvas
+      .getContext("2d")
+      .drawImage(
+        i,
+        0,
+        0,
+        i.naturalWidth,
+        i.naturalHeight
+      );
+
+    workCanvas=
+      document.createElement("canvas");
+
+    workCanvas.width=i.naturalWidth;
+    workCanvas.height=i.naturalHeight;
+
+    workCanvas
+      .getContext("2d")
+      .drawImage(sourceCanvas,0,0);
+
+    maskCanvas=
+      document.createElement("canvas");
+
+    maskCanvas.width=i.naturalWidth;
+    maskCanvas.height=i.naturalHeight;
+
+    history=[];
+
+    draw();
+
+    result.innerHTML=
+      "<b>"+esc(file.name)+"</b>"+
+      "<br>Original size: "+
+      fmt(file.size)+
+      "<br>Dimensions: "+
+      i.naturalWidth+
+      " × "+
+      i.naturalHeight+
+      " px";
+
+    URL.revokeObjectURL(url);
+
+  };
+
+  i.onerror=()=>{
+
+    URL.revokeObjectURL(url);
+
+    err("Unable to load this image.");
+
+  };
+
+  i.src=url;
+
+}
+
+
+function draw(){
+
+  if(!workCanvas)return;
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  ctx.drawImage(
+    workCanvas,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  /*
+    Correct red selection overlay.
+  */
+
+  if(maskCanvas){
+
+    const overlay=
+      document.createElement("canvas");
+
+    overlay.width=canvas.width;
+    overlay.height=canvas.height;
+
+    const octx=
+      overlay.getContext("2d");
+
+    octx.drawImage(
+      maskCanvas,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    octx.globalCompositeOperation=
+      "source-in";
+
+    octx.fillStyle=
+      "rgba(255,25,65,.72)";
+
+    octx.fillRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    ctx.drawImage(
+      overlay,
+      0,
+      0
+    );
+
+  }
+
+}
+
+
+function getPoint(e){
+
+  const r=
+    canvas.getBoundingClientRect();
+
+  return {
+
+    x:
+      (e.clientX-r.left)*
+      workCanvas.width/
+      r.width,
+
+    y:
+      (e.clientY-r.top)*
+      workCanvas.height/
+      r.height
+
+  };
+
+}
+
+
+function saveHistory(){
+
+  if(!maskCanvas)return;
+
+  const m=
+    maskCanvas
+    .getContext("2d");
+
+  history.push(
+    m.getImageData(
+      0,
+      0,
+      maskCanvas.width,
+      maskCanvas.height
+    )
+  );
+
+  if(history.length>30){
+    history.shift();
+  }
+
+}
+
+
+function paint(e){
+
+  if(!maskCanvas)return;
+
+  const p=
+    getPoint(e);
+
+  const m=
+    maskCanvas.getContext("2d");
+
+  const radius=
+    Number(brush.value)*
+    Math.max(
+      workCanvas.width/
+      canvas.width,
+      workCanvas.height/
+      canvas.height
+    );
+
+  m.fillStyle="#fff";
+
+  m.beginPath();
+
+  /*
+    Smooth continuous brush.
+  */
+
+  if(lastPoint){
+
+    const dx=p.x-lastPoint.x;
+    const dy=p.y-lastPoint.y;
+
+    const distance=
+      Math.sqrt(dx*dx+dy*dy);
+
+    const steps=
+      Math.max(
+        1,
+        Math.ceil(distance/(radius*.35))
+      );
+
+    for(let i=1;i<=steps;i++){
+
+      const x=
+        lastPoint.x+
+        dx*(i/steps);
+
+      const y=
+        lastPoint.y+
+        dy*(i/steps);
+
+      m.beginPath();
+
+      m.arc(
+        x,
+        y,
+        radius,
+        0,
+        Math.PI*2
+      );
+
+      m.fill();
+
+    }
+
+  }else{
+
+    m.beginPath();
+
+    m.arc(
+      p.x,
+      p.y,
+      radius,
+      0,
+      Math.PI*2
+    );
+
+    m.fill();
+
+  }
+
+  lastPoint=p;
+
+  draw();
+
+}
+
+
+canvas.addEventListener(
+  "pointerdown",
+  e=>{
+
+    if(processing)return;
+
+    e.preventDefault();
+
+    drawing=true;
+    lastPoint=null;
+
+    canvas.setPointerCapture(
+      e.pointerId
+    );
+
+    saveHistory();
+
+    paint(e);
+
+  }
+);
+
+
+canvas.addEventListener(
+  "pointermove",
+  e=>{
+
+    if(!drawing||processing)return;
+
+    e.preventDefault();
+
+    paint(e);
+
+  }
+);
+
+
+canvas.addEventListener(
+  "pointerup",
+  e=>{
+
+    drawing=false;
+    lastPoint=null;
+
+  }
+);
+
+
+canvas.addEventListener(
+  "pointercancel",
+  e=>{
+
+    drawing=false;
+    lastPoint=null;
+
+  }
+);
+
+
+brush.oninput=()=>{
+
+  $("bv").textContent=
+    brush.value+" px";
+
+};
+
+
+strength.oninput=()=>{
+
+  $("sv").textContent=
+    strength.value+"%";
+
+};
+
+
+undo.onclick=()=>{
+
+  if(!maskCanvas||!history.length)return;
+
+  const m=
+    maskCanvas
+    .getContext("2d");
+
+  m.putImageData(
+    history.pop(),
+    0,
+    0
+  );
+
+  draw();
+
+};
+
+
+clear.onclick=()=>{
+
+  if(!maskCanvas)return;
+
+  const m=
+    maskCanvas
+    .getContext("2d");
+
+  m.clearRect(
+    0,
+    0,
+    maskCanvas.width,
+    maskCanvas.height
+  );
+
+  history=[];
+
+  draw();
+
+  result.textContent=
+    "Selection cleared.";
+
+};
+
+
+remove.onclick=async()=>{
+
+  if(!workCanvas){
+
+    err("Please upload an image first.");
+
+    return;
+
+  }
+
+  const maskCtx=
+    maskCanvas.getContext("2d");
+
+  const md=
+    maskCtx.getImageData(
+      0,
+      0,
+      maskCanvas.width,
+      maskCanvas.height
+    );
+
+  let selected=false;
+
+  for(
+    let i=3;
+    i<md.data.length;
+    i+=4
+  ){
+
+    if(md.data[i]>10){
+
+      selected=true;
+      break;
+
+    }
+
+  }
+
+  if(!selected){
+
+    err(
+      "Paint over the object you want to remove."
+    );
+
+    return;
+
+  }
+
+  processing=true;
+
+  remove.disabled=true;
+
+  download.disabled=true;
+
+  remove.textContent=
+    "Processing...";
+
+  result.innerHTML=
+    "⏳ Removing object...";
+
+  try{
+
+    await cvReady;
+
+    /*
+      Convert original image to OpenCV Mat.
+    */
+
+    const src=
+      cv.imread(workCanvas);
+
+    const mask=
+      cv.imread(maskCanvas);
+
+    /*
+      Convert mask to grayscale.
+    */
+
+    const grayMask=
+      new cv.Mat();
+
+    cv.cvtColor(
+      mask,
+      grayMask,
+      cv.COLOR_RGBA2GRAY
+    );
+
+    mask.delete();
+
+    /*
+      Strength controls how wide the
+      inpainting region is expanded.
+    */
+
+    const st=
+      Number(strength.value);
+
+    const kernelSize=
+      st>=85
+      ? 9
+      : st>=65
+      ? 7
+      : st>=45
+      ? 5
+      : 3;
+
+    const kernel=
+      cv.Mat.ones(
+        kernelSize,
+        kernelSize,
+        cv.CV_8U
+      );
+
+    const expanded=
+      new cv.Mat();
+
+    cv.dilate(
+      grayMask,
+      expanded,
+      kernel
+    );
+
+    kernel.delete();
+    grayMask.delete();
+
+    /*
+      Inpainting radius.
+    */
+
+    const radius=
+      st>=80
+      ? 5
+      : st>=55
+      ? 4
+      : 3;
+
+    const dst=
+      new cv.Mat();
+
+    /*
+      Telea generally gives the most
+      natural browser-side result for
+      this type of manual object removal.
+    */
+
+    cv.inpaint(
+      src,
+      expanded,
+      dst,
+      radius,
+      cv.INPAINT_TELEA
+    );
+
+    /*
+      Blend according to strength.
+    */
+
+    const original=
+      new cv.Mat();
+
+    cv.imread(
+      workCanvas,
+      original
+    );
+
+    const alpha=
+      Number(strength.value)/100;
+
+    if(alpha<1){
+
+      cv.addWeighted(
+        dst,
+        alpha,
+        original,
+        1-alpha,
+        0,
+        dst
+      );
+
+    }
+
+    cv.imshow(
+      workCanvas,
+      dst
+    );
+
+    src.delete();
+    original.delete();
+    expanded.delete();
+    dst.delete();
+
+    maskCtx.clearRect(
+      0,
+      0,
+      maskCanvas.width,
+      maskCanvas.height
+    );
+
+    history=[];
+
+    draw();
+
+    result.innerHTML=
+      "<b>✓ Object removed successfully.</b>"+
+      "<br>Check the result and download it.";
+
+  }catch(e){
+
+    console.error(e);
+
+    err(
+      "Object removal failed. Please try again."
+    );
+
+  }
+
+  processing=false;
+
+  remove.disabled=false;
+
+  download.disabled=false;
+
+  remove.textContent=
+    "Remove Object";
+
+};
+
+
+download.onclick=()=>{
+
+  if(!workCanvas){
+
+    err("Please upload an image first.");
+
+    return;
+
+  }
+
+  workCanvas.toBlob(
+    blob=>{
+
+      const url=
+        URL.createObjectURL(blob);
+
+      const a=
+        document.createElement("a");
+
+      a.href=url;
+
+      a.download=
+        originalName+
+        "-object-removed.png";
+
+      document.body.appendChild(a);
+
+      a.click();
+
+      a.remove();
+
+      setTimeout(
+        ()=>{
+          URL.revokeObjectURL(url);
+        },
+        1500
+      );
+
+      result.innerHTML=
+        "<b>✓ Download ready!</b>"+
+        "<br>Output size: "+
+        fmt(blob.size);
+
+    },
+    "image/png"
+  );
+
+};
+
+
+reset.onclick=()=>{
+
+  file.value="";
+
+  img=null;
+
+  sourceCanvas=null;
+  workCanvas=null;
+  maskCanvas=null;
+
+  history=[];
+
+  preview.style.display="none";
+  zone.style.display="";
+
+  result.textContent=
+    "Upload an image, then paint over the unwanted object.";
+
+  remove.disabled=false;
+  download.disabled=false;
+
+  remove.textContent=
+    "Remove Object";
+
+};
+
+
+function fmt(n){
+
+  if(!n)return"0 B";
+
+  const units=[
+    "B",
+    "KB",
+    "MB",
+    "GB"
+  ];
+
+  const i=
+    Math.min(
+      3,
+      Math.floor(
+        Math.log(n)/
+        Math.log(1024)
+      )
+    );
+
+  return(
+    n/
+    Math.pow(1024,i)
+  ).toFixed(
+    i?2:0
+  )+
+  " "+
+  units[i];
+
+}
+
+
+function err(message){
+
+  result.innerHTML=
+    '<b style="color:var(--danger)">'+
+    esc(message)+
+    "</b>";
+
+  remove.disabled=false;
+
+  download.disabled=false;
+
+  remove.textContent=
+    "Remove Object";
+
+}
+
+
+function esc(value){
+
+  return String(value).replace(
+    /[&<>"']/g,
+    m=>({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[m])
+  );
+
+}
+
+</script>
+</body></html>
