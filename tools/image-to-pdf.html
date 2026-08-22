@@ -296,9 +296,8 @@ Set PDF Password (Optional)
 >
 
 <span class="passwordNote">
-Password encryption requires an additional PDF encryption engine.
+🔐 Your PDF will be password protected when a password is entered.
 </span>
-
 </label>
 
 </div>
@@ -749,6 +748,29 @@ make.onclick=async()=>{
     const js=
       await loadPDFLib();
 
+    async function loadPDFEncrypt(){
+
+  if(window.PDFEncrypt){
+    return window.PDFEncrypt;
+  }
+
+  await new Promise((resolve,reject)=>{
+
+    const script=document.createElement("script");
+
+    script.src=
+      "https://cdn.jsdelivr.net/npm/@pdfsmaller/pdf-encrypt@1.2.0/dist/pdf-encrypt.umd.js";
+
+    script.onload=resolve;
+    script.onerror=reject;
+
+    document.head.appendChild(script);
+
+  });
+
+  return window.PDFEncrypt;
+    }
+
     const pdf=
       await js.PDFDocument.create();
 
@@ -862,8 +884,25 @@ make.onclick=async()=>{
 
     }
 
-    const output=
-      await pdf.save();
+  let output=await pdf.save();
+
+if(password.value.trim()){
+
+  const PDFEncrypt=await loadPDFEncrypt();
+
+  output=await PDFEncrypt.encryptPDF(
+    output,
+    password.value.trim(),
+    {
+      ownerPassword:password.value.trim(),
+      allowPrinting:true,
+      allowModifying:false,
+      allowCopying:false,
+      allowAnnotating:true,
+      allowFillingForms:true
+    }
+  );
+}
 
     const blob=
       new Blob(
